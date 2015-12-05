@@ -14,7 +14,7 @@ do {
 	const hash = crypto.createHash("md5");
 	hash.update(input + num);
 	if(hash.digest("hex").startsWith(startsWith)) {
-		console.log(num);
+		console.log(`First int that produces a hash starting with ${startsWith}: ${num}`);
 		collissions++;
 	};
 	num++;
