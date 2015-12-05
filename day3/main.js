@@ -40,9 +40,7 @@ for(let i = 0; i < directions.length; i++) {
 			numberOfHouses++;
 		}
 	} else {
-		let y = { };
-		y[location.y] = true;
-		housesVisited[location.x] = y;
+		housesVisited[location.x] = { [location.y]: true };
 		numberOfHouses++;
 	}
 }
