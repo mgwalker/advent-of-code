@@ -47,4 +47,4 @@ for(let i = 0; i < directions.length; i++) {
 	}
 }
 
-console.log(numberOfHouses);
+console.log(`Total houses visted by ${numberOfSantas} Santas: ${numberOfHouses}`);
