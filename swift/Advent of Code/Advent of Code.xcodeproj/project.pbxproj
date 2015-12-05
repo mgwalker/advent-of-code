@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B9B0FE4F1C127C0C0096DFC0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B0FE4E1C127C0C0096DFC0 /* main.swift */; };
 		B9B0FE591C127D0B0096DFC0 /* day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B0FE581C127D0B0096DFC0 /* day1.swift */; };
+		B9B0FE5C1C1280690096DFC0 /* day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B0FE5B1C1280690096DFC0 /* day2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		B9B0FE4E1C127C0C0096DFC0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B9B0FE571C127C670096DFC0 /* day1 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = day1; sourceTree = "<group>"; };
 		B9B0FE581C127D0B0096DFC0 /* day1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = day1.swift; path = "Advent of Code/day1/day1.swift"; sourceTree = "<group>"; };
+		B9B0FE5A1C12802C0096DFC0 /* day2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = day2; sourceTree = "<group>"; };
+		B9B0FE5B1C1280690096DFC0 /* day2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = day2.swift; path = "Advent of Code/day2/day2.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +47,7 @@
 		B9B0FE421C127C0C0096DFC0 = {
 			isa = PBXGroup;
 			children = (
+				B9B0FE5B1C1280690096DFC0 /* day2.swift */,
 				B9B0FE581C127D0B0096DFC0 /* day1.swift */,
 				B9B0FE4D1C127C0C0096DFC0 /* Advent of Code */,
 				B9B0FE4C1C127C0C0096DFC0 /* Products */,
@@ -61,6 +65,7 @@
 		B9B0FE4D1C127C0C0096DFC0 /* Advent of Code */ = {
 			isa = PBXGroup;
 			children = (
+				B9B0FE5A1C12802C0096DFC0 /* day2 */,
 				B9B0FE571C127C670096DFC0 /* day1 */,
 				B9B0FE4E1C127C0C0096DFC0 /* main.swift */,
 			);
@@ -126,6 +131,7 @@
 			files = (
 				B9B0FE4F1C127C0C0096DFC0 /* main.swift in Sources */,
 				B9B0FE591C127D0B0096DFC0 /* day1.swift in Sources */,
+				B9B0FE5C1C1280690096DFC0 /* day2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
