@@ -32,19 +32,15 @@ function tryTheThings(frosting, candy, butterscotch) {
 tryTheThings();
 
 let maxRecipe = { score: { composite: -Infinity }};
+let maxConstrainedRecipe = { score: { composite: -Infinity }};
 for(let score of scores) {
 	if(score.score.composite > maxRecipe.score.composite) {
 		maxRecipe = score;
 	}
-}
-
-console.log(`[Part 1] Best total score is ${maxRecipe.score.composite}`);
-
-maxRecipe = { score: { composite: -Infinity }};
-for(let score of scores) {
-	if(score.score.composite > maxRecipe.score.composite && score.score.calories == 500) {
-		maxRecipe = score;
+	if(score.score.composite > maxConstrainedRecipe.score.composite && score.score.calories == 500) {
+		maxConstrainedRecipe = score;
 	}
 }
 
-console.log(`[Part 2] Best total score with exactly 500 calories is ${maxRecipe.score.composite}`);
+console.log(`[Part 1] Best total score is ${maxRecipe.score.composite}`);
+console.log(`[Part 2] Best total score with exactly 500 calories is ${maxConstrainedRecipe.score.composite}`);
