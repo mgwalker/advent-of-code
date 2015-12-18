@@ -7,12 +7,16 @@ const containersFor150 = [ ];
 let minContainers = Infinity;
 let sumsTo150 = 0;
 
-for(let it = 0; it < Math.pow(2, lines.length - 1); it++) {
+const iterations = 1 << lines.length - 1;
+for(let it = 0; it < iterations; it++) {
 	let sum = 0;
 	let bits = [ ];
 	for(let i = 1; i < lines.length; i++) {
 		if((1 << (i - 1)) & it) {
 			sum += lines[i]
+			if(sum > 150) {
+				break;
+			}
 			bits.push(lines[i]);
 		}
 	}
