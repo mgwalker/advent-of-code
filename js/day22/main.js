@@ -23,14 +23,7 @@ const spells = [
 let winModes = [ ];
 
 function clone(obj) {
-	try {
-		obj = JSON.parse(JSON.stringify(obj));
-	} catch(e) {
-		console.log(obj);
-		console.log(e);
-		process.exit(0);
-	}
-	return obj;
+	return JSON.parse(JSON.stringify(obj));
 }
 
 function pickSpell(player) {
@@ -167,6 +160,7 @@ function run(player, boss, spell, hardMode, manaSpent, spaces, print) {
 	}
 }
 
+console.time("part1");
 for(let spell of spells) {
 	run(player, boss, spell, false, 0, "", false);
 }
@@ -174,9 +168,12 @@ for(let spell of spells) {
 winModes.sort((a, b) => a - b);
 console.log(`In ${runs} battles, found ${winModes.length} wins`);
 console.log(`[Part 1] Least mana to win: ${winModes[0]}`);
+console.timeEnd("part1");
 
 runs = 0;
 winModes.length = 0;
+
+console.time("part2");
 for(let spell of spells) {
 	run(player, boss, spell, true, 0, "", false);
 }
@@ -185,3 +182,4 @@ winModes.sort((a, b) => a - b);
 console.log();
 console.log(`In ${runs} battles, found ${winModes.length} wins`);
 console.log(`[Part 2] Least mana to win: ${winModes[0]}`);
+console.timeEnd("part2");
