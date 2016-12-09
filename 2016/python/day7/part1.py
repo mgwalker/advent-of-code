@@ -1,4 +1,3 @@
-import re
 with open('input') as input:
     lines = input.read().split('\n')
 
@@ -29,6 +28,5 @@ for line in lines:
 
     if is_good == 1:
         supportsTLS += [line]
-    #break
 
 print('[part 1] {} IPs support TLS'.format(len(supportsTLS)))
