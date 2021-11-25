@@ -102,8 +102,6 @@ const part2 = (rawInput) => {
   }
 
   return seatMap(next).replace(/\n/g, "").replace(/[^#]/gi, "").length;
-
-  return;
 };
 
 run({
