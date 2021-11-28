@@ -29,7 +29,7 @@ const part1 = (rawInput) => {
 
 const part2 = (rawInput) => {
   const input = parseInput(rawInput);
-  return runTheGame(input, 30000000);
+  return runTheGame(input, 30_000_000);
 };
 
 run({
