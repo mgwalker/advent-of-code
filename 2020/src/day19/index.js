@@ -12,119 +12,83 @@ const parseInput = (rawInput) => {
 
 const part1 = (rawInput) => {
   const { rules, messages } = parseInput(rawInput);
-  for (const [key, value] of rules) {
-    if (value === "a" || value === "b") {
-      rules.set(key, (str) => {
-        if (str.startsWith(value)) {
-          return [true, value];
-        } else {
-          return [false];
-        }
-      });
-    } else {
-      rules.set(key, (str) => {
-        const oneOf = value.split(" | ").map((v) => v.trim());
 
-        for (const or of oneOf) {
-          let localStr = str;
-          let substr = [];
+  const createRegexString = (ruleNumber) => {
+    const rule = rules.get(ruleNumber);
 
-          const parts = or.split(" ").map((v) => v.trim());
-          for (const part of parts) {
-            const [pass, match] = rules.get(part)(localStr);
-            if (pass) {
-              localStr = localStr.substr(match.length);
-              substr.push(match);
-            } else {
-              // We can stop examining this side of the OR if any part fails
-              substr.length = 0;
-              break;
-            }
-          }
-
-          // If this side of the OR has a matching substring, we don't need
-          // to check the other side.
-          if (substr.length > 0) {
-            return [true, substr.join("")];
-          }
-        }
-
-        return [false, str];
-      });
+    if (rule === "a" || rule === "b") {
+      return rule;
     }
-  }
 
-  const matches = messages.map((message) => {
-    const [pass, match] = rules.get("0")(message);
-    if (match === message) {
-      return pass;
-    }
-    return false;
-  });
-
-  return matches.filter((pass) => pass).length;
+    return ` ( ${rule
+      .split("|")
+      .map((v) => v.trim())
+      .map((orRule) =>
+        orRule
+          .split(" ")
+          .map((v) => v.trim())
+          .map((andRule) => createRegexString(andRule))
+          .join(" "),
+      )
+      .join(" | ")} ) `;
+  };
+  const regex = new RegExp(`^${createRegexString("0").replace(/ /g, "")}$`);
+  return messages.filter((m) => regex.test(m)).length;
 };
 
 const part2 = (rawInput) => {
   const { rules, messages } = parseInput(rawInput);
 
-  rules.set("8", "42 | 42 8");
-  rules.set("11", "42 31 | 42 11 31");
+  const createRegexString = (ruleNumber) => {
+    const rule = rules.get(ruleNumber);
 
-  for (const [key, value] of rules) {
-    rules.set(key, (str, prefix = "") => {
-      console.log(`${prefix}RULE ${key}: ${str}`);
-      if (value === "a" || value === "b") {
-        if (str.startsWith(value)) {
-          console.log(`${prefix}  (${key}) true | ${value}`);
-          return [true, value];
-        } else {
-          console.log(`${prefix}  (${key}) false`);
-          return [false];
-        }
-      }
-
-      const oneOf = value.split(" | ").map((v) => v.trim());
-
-      for (const or of oneOf) {
-        let localStr = str;
-        let substr = [];
-
-        const parts = or.split(" ").map((v) => v.trim());
-        for (const part of parts) {
-          const [pass, match] = rules.get(part)(localStr, `${prefix}  `);
-          if (pass) {
-            localStr = localStr.substr(match.length);
-            substr.push(match);
-          } else {
-            // We can stop examining this side of the OR if any part fails
-            substr.length = 0;
-            break;
-          }
-        }
-
-        // If this side of the OR has a matching substring, we don't need
-        // to check the other side.
-        if (substr.length > 0) {
-          console.log(`${prefix}  (${key}) true | ${substr.join("")}`);
-          return [true, substr.join("")];
-        }
-      }
-
-      console.log(`${prefix}  (${key}) ${false}`);
-      return [false, str];
-    });
-  }
-
-  const matches = messages.map((message) => {
-    const [pass, match] = rules.get("0")(message);
-    if (match === message) {
-      return pass;
+    if (rule === "a" || rule === "b") {
+      return rule;
     }
-    return false;
-  });
 
-  return matches.filter((pass) => pass).length;
+    // Rule 11 becomes special case. It resolves to any one of:
+    //
+    //    42 31
+    //    42 42 31 31
+    //    42 42 42 31 31 31
+    //    42 42 42 42 31 31 31 31
+    //
+    // ...and so on. So build up a set of matches accordingly.
+    if (ruleNumber === "11") {
+      const fortytwo = createRegexString("42");
+      const thirtyone = createRegexString("31");
+
+      // This is a haaaaaaaack. Limit the recursion to a depth of 10 because
+      // otherwise it's too many captures and the RegEx engine barfs.
+      const all = [...Array(10)].map((_, num) => {
+        const one = [];
+        const two = [];
+        for (let i = 0; i <= num; i += 1) {
+          one.push(fortytwo);
+          two.push(thirtyone);
+        }
+        return `${one.join("")}${two.join("")}`;
+      });
+
+      return ` ( ${all.join(" | ")} )`;
+    }
+
+    return ` ( ${rule
+      .split("|")
+      .map((v) => v.trim())
+      .map((orRule) =>
+        orRule
+          .split(" ")
+          .map((v) => v.trim())
+          .map((andRule) => createRegexString(andRule))
+          .join(" "),
+      )
+      // Rule 8 is also a special case, but it's just the same match repeated
+      // one or more times, which we can handle by just adding a +.
+      .join(" | ")} )${ruleNumber === "8" ? "+" : ""} `;
+  };
+  const regex = new RegExp(`^${createRegexString("0").replace(/ /g, "")}$`);
+  return messages.filter((m) => regex.test(m)).length;
 };
 
 run({

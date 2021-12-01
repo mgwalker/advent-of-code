@@ -302,17 +302,17 @@
     {
       "part1": {
         "solved": true,
-        "result": "0",
+        "result": "171",
         "attempts": [],
-        "time": 0.48
+        "time": 13.67
       },
       "part2": {
-        "solved": false,
-        "result": "0",
+        "solved": true,
+        "result": "369",
         "attempts": [
           "226"
         ],
-        "time": 3.3
+        "time": 9583.67
       }
     },
     {
