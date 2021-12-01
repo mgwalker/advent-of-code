@@ -10,13 +10,10 @@ const part1 = (rawInput) => {
 const part2 = (rawInput) => {
   const input = parseInput(rawInput);
 
-  const windows = [];
-  for (let i = 0; i < input.length - 2; i += 1) {
-    windows.push(input.slice(i, i + 3).reduce((sum, v) => sum + v, 0));
-  }
-
-  return windows.filter((v, i) => (i === 0 ? false : v > windows[i - 1]))
-    .length;
+  return parseInput(rawInput)
+    .slice(0, input.length - 2)
+    .map((_, i) => input.slice(i, i + 3).reduce((sum, v) => sum + v, 0))
+    .filter((v, i, all) => (i === 0 ? false : v > all[i - 1])).length;
 };
 
 run({
