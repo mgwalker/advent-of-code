@@ -36,7 +36,43 @@ enum Day2 {
     print(Int(gamma, radix: 2)! * Int(epsilon, radix: 2)!)
   }
 
-  static func part2() {}
+  static func part2() {
+    let data = input()
+
+    var o2 = data
+    var co2 = data
+
+    var i = 0
+    while o2.count > 1 {
+      let bits = o2.map { $0[$0.index($0.startIndex, offsetBy: i)] }
+
+      var select: Character = "0"
+      if bits.filter({ $0 == "1" }).count >= bits.filter({ $0 == "0" }).count {
+        select = "1"
+      }
+
+      o2 = o2.filter { $0[$0.index($0.startIndex, offsetBy: i)] == select }
+      i += 1
+    }
+
+    i = 0
+    while co2.count > 1 {
+      let bits = co2.map { $0[$0.index($0.startIndex, offsetBy: i)] }
+
+      var select: Character = "0"
+      if bits.filter({ $0 == "1" }).count < bits.filter({ $0 == "0" }).count {
+        select = "1"
+      }
+
+      co2 = co2.filter { $0[$0.index($0.startIndex, offsetBy: i)] == select }
+      i += 1
+    }
+
+    let o2v = Int(o2[0], radix: 2)!
+    let co2v = Int(co2[0], radix: 2)!
+
+    print(o2v * co2v)
+  }
 }
 
 Day2.part1()
