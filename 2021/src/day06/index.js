@@ -10,15 +10,11 @@ const runFor = (raw, days) => {
     fishies[fishy] += 1;
   });
 
-  const nextDay = (() => {
-    return () => {
-      const newFish = fishies.shift();
-      fishies.push(newFish);
-      fishies[6] += newFish;
-    };
-  })();
-
-  [...Array(days)].forEach(nextDay);
+  for (let i = 0; i < days; i += 1) {
+    const newFish = fishies.shift();
+    fishies.push(newFish);
+    fishies[6] += newFish;
+  }
 
   return fishies.reduce((sum, num) => sum + num, 0);
 };
