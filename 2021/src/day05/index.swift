@@ -25,30 +25,33 @@ class Line {
   }
 
   func allPoints() -> [Point] {
-    var points: [Point] = []
-
-    var deltaX = 0
-    var deltaY = 0
     if horizontal() {
-      deltaX = end.x - start.x > 0 ? 1 : -1
+      let range = start.x < end.x ? start.x ... end.x : end.x ... start.x
+      return range.map { Point(x: $0, y: start.y) }
     } else if vertical() {
-      deltaY = end.y - start.y > 0 ? 1 : -1
+      let range = start.y < end.y ? start.y ... end.y : end.y ... start.y
+      return range.map { Point(x: start.x, y: $0) }
     } else {
+      var points: [Point] = []
+
+      var deltaX = 0
+      var deltaY = 0
+
       deltaX = end.x - start.x > 0 ? 1 : -1
       deltaY = end.y - start.y > 0 ? 1 : -1
-    }
 
-    var x = start.x
-    var y = start.y
+      var x = start.x
+      var y = start.y
 
-    while x != end.x || y != end.y {
+      while x != end.x || y != end.y {
+        points.append(Point(x: x, y: y))
+        x += deltaX
+        y += deltaY
+      }
       points.append(Point(x: x, y: y))
-      x += deltaX
-      y += deltaY
-    }
-    points.append(Point(x: x, y: y))
 
-    return points
+      return points
+    }
   }
 
   func horizontal() -> Bool {
@@ -82,20 +85,23 @@ enum Day5 {
     return board.values.filter { $0 > 1 }.count
   }
 
-  static func part1() {
+  static func part1() -> Int {
     let data = input().filter { $0.horizontal() || $0.vertical() }
-
-    print("PART 1")
-    print("  ", run(ventLines: data))
+    return run(ventLines: data)
   }
 
-  static func part2() {
+  static func part2() -> Int {
     let data = input()
-
-    print("PART 2")
-    print("  ", run(ventLines: data))
+    return run(ventLines: data)
   }
 }
 
-Day5.part1()
-Day5.part2()
+print("PART 1:")
+let t1 = DispatchTime.now()
+print("  ", Day5.part1())
+print("  ", Double(DispatchTime.now().uptimeNanoseconds - t1.uptimeNanoseconds) / 1_000_000.0, "ms")
+print("")
+print("PART 2:")
+let t2 = DispatchTime.now()
+print("  ", Day5.part2())
+print("  ", Double(DispatchTime.now().uptimeNanoseconds - t2.uptimeNanoseconds) / 1_000_000.0, "ms")
