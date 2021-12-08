@@ -1,6 +1,6 @@
 import Foundation
 
-struct Day1 {
+enum Day1 {
   static func input() -> [Int] {
     do {
       let contents = try String(contentsOfFile: "input.txt")
@@ -11,27 +11,21 @@ struct Day1 {
     }
   }
 
-  static func part1() {
+  static func part1() -> Int {
     let data = input()
-    let valid = data.indices
+    return data.indices
       .filter { $0 > 0 && data[$0] > data[$0 - 1] }
       .count
-    print(valid)
   }
 
-  static func part2() {
+  static func part2() -> Int {
     let data = input()
     let windows = data.indices
       .filter { $0 < data.count - 2 }
       .map { data[$0] + data[$0 + 1] + data[$0 + 2] }
 
-    let valid = windows.indices
+    return windows.indices
       .filter { $0 > 0 && windows[$0] > windows[$0 - 1] }
       .count
-
-    print(valid)
   }
 }
-
-Day1.part1()
-Day1.part2()

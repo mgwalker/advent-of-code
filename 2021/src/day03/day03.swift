@@ -1,13 +1,13 @@
 import Foundation
 
-enum Day2 {
+enum Day3 {
   static func input() -> [Substring] {
     do {
       return try String(contentsOfFile: "input.txt").split(separator: "\n")
     } catch { return [] }
   }
 
-  static func part1() {
+  static func part1() -> Int {
     let data = input()
     var gamma = ""
     var epsilon = ""
@@ -33,10 +33,10 @@ enum Day2 {
       }
     }
 
-    print(Int(gamma, radix: 2)! * Int(epsilon, radix: 2)!)
+    return Int(gamma, radix: 2)! * Int(epsilon, radix: 2)!
   }
 
-  static func part2() {
+  static func part2() -> Int {
     let data = input()
 
     var o2 = data
@@ -71,9 +71,6 @@ enum Day2 {
     let o2v = Int(o2[0], radix: 2)!
     let co2v = Int(co2[0], radix: 2)!
 
-    print(o2v * co2v)
+    return o2v * co2v
   }
 }
-
-Day2.part1()
-Day2.part2()

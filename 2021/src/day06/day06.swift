@@ -1,6 +1,6 @@
 import Foundation
 
-struct Day06 {
+struct Day6 {
   static func input() -> [Int] {
     do {
       return try String(contentsOfFile: "input.txt")
@@ -28,20 +28,11 @@ struct Day06 {
     return fishies.reduce(0) { sum, fish in sum + fish }
   }
 
-  static func part1() {
-    print("""
-    Part 1:
-          \(run(days: 80))
-    """)
+  static func part1() -> Int {
+    return run(days: 80)
   }
 
-  static func part2() {
-    print("""
-    Part 2:
-          \(run(days: 256))
-    """)
+  static func part2() -> Int {
+    return run(days: 256)
   }
 }
-
-Day06.part1()
-Day06.part2()

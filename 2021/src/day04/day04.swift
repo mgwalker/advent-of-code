@@ -1,6 +1,6 @@
 import Foundation
 
-class BoardSpot {
+private class BoardSpot {
   private(set) var number = -1
   var checked = false
 
@@ -15,7 +15,7 @@ class BoardSpot {
   }
 }
 
-class Board {
+private class Board {
   private var spots: [[BoardSpot]] = []
 
   init(boardStrings: [String]) {
@@ -69,7 +69,7 @@ class Board {
 enum Day4 {
   struct Input {
     var calls: [Int] = []
-    var boards: [Board] = []
+    fileprivate var boards: [Board] = []
   }
 
   static func input() -> Input? {
@@ -90,7 +90,7 @@ enum Day4 {
     } catch { return nil }
   }
 
-  static func part1() {
+  static func part1() -> Int {
     let data = input()!
 
     var callIndex = 0
@@ -101,16 +101,15 @@ enum Day4 {
         board.called(withNumber: called)
 
         if board.hasBingo() {
-          print("PART 1")
-          print("  \(board.score(withNumber: called))")
-          return
+          return board.score(withNumber: called)
         }
       }
       callIndex += 1
     }
+    return -1
   }
 
-  static func part2() {
+  static func part2() -> Int {
     let data = input()!
     var boards = data.boards
 
@@ -133,10 +132,6 @@ enum Day4 {
       callIndex += 1
     }
 
-    print("PART 2")
-    print("  \(lastWinningBoard!.score(withNumber: lastWinningNumber))")
+    return lastWinningBoard!.score(withNumber: lastWinningNumber)
   }
 }
-
-Day4.part1()
-Day4.part2()

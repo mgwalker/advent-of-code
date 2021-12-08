@@ -1,6 +1,6 @@
 import Foundation
 
-struct Day2 {
+enum Day2 {
   static func input() -> [[Substring]] {
     do {
       let contents = try String(contentsOfFile: "input.txt")
@@ -12,7 +12,7 @@ struct Day2 {
     }
   }
 
-  static func part1() {
+  static func part1() -> Int {
     let data = input()
     var horizontal = 0, depth = 0
 
@@ -32,10 +32,10 @@ struct Day2 {
       }
     }
 
-    print(horizontal * depth)
+    return horizontal * depth
   }
 
-  static func part2() {
+  static func part2() -> Int {
     let data = input()
     var aim = 0, horizontal = 0, depth = 0
 
@@ -56,9 +56,6 @@ struct Day2 {
       }
     }
 
-    print(horizontal * depth)
+    return horizontal * depth
   }
 }
-
-Day2.part1()
-Day2.part2()

@@ -9,18 +9,15 @@ struct Day7 {
     }
   }
 
-  static func part1() {
+  static func part1() -> Int {
     let crabs = input()
     let target = crabs.sorted()[crabs.count / 2]
 
     let fuel = crabs.reduce(0) { sum, crab in sum + abs(target - crab) }
-    print("""
-    PART 1
-      \(fuel)
-    """)
+    return fuel
   }
 
-  static func part2() {
+  static func part2() -> Int {
     let crabs = input()
 
     let fuelCosts = (crabs.min()! ... crabs.max()!).map { crabspot in
@@ -31,12 +28,6 @@ struct Day7 {
       .reduce(0) { sum, fuel in sum + fuel }
     }
 
-    print("""
-    PART 2
-      \(fuelCosts.min()!)
-    """)
+    return fuelCosts.min()!
   }
 }
-
-Day7.part1()
-Day7.part2()

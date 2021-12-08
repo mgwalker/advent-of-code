@@ -1,6 +1,6 @@
 import Foundation
 
-struct Point: Equatable, Hashable {
+private struct Point: Equatable, Hashable {
   var x: Int
   var y: Int
 
@@ -14,7 +14,7 @@ struct Point: Equatable, Hashable {
   }
 }
 
-class Line {
+private class Line {
   private var start: Point
   private var end: Point
 
@@ -64,13 +64,13 @@ class Line {
 }
 
 enum Day5 {
-  static func input() -> [Line] {
+  private static func input() -> [Line] {
     do {
       return try String(contentsOfFile: "input.txt").split(separator: "\n").map { Line(with: String($0)) }
     } catch { return [] }
   }
 
-  static func run(ventLines: [Line]) -> Int {
+  private static func run(ventLines: [Line]) -> Int {
     var board: [Point: Int] = [:]
 
     for vent in ventLines {
@@ -96,12 +96,12 @@ enum Day5 {
   }
 }
 
-print("PART 1:")
-let t1 = DispatchTime.now()
-print("  ", Day5.part1())
-print("  ", Double(DispatchTime.now().uptimeNanoseconds - t1.uptimeNanoseconds) / 1_000_000.0, "ms")
-print("")
-print("PART 2:")
-let t2 = DispatchTime.now()
-print("  ", Day5.part2())
-print("  ", Double(DispatchTime.now().uptimeNanoseconds - t2.uptimeNanoseconds) / 1_000_000.0, "ms")
+// print("PART 1:")
+// let t1 = DispatchTime.now()
+// print("  ", Day5.part1())
+// print("  ", Double(DispatchTime.now().uptimeNanoseconds - t1.uptimeNanoseconds) / 1_000_000.0, "ms")
+// print("")
+// print("PART 2:")
+// let t2 = DispatchTime.now()
+// print("  ", Day5.part2())
+// print("  ", Double(DispatchTime.now().uptimeNanoseconds - t2.uptimeNanoseconds) / 1_000_000.0, "ms")
