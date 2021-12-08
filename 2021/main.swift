@@ -6,10 +6,24 @@ func help() {
   """)
 }
 
+public extension String {
+  func leftpad(length: Int, character: Character = " ") -> String {
+    var out = self
+    var extra = length - out.count
+
+    while extra > 0 {
+      out.insert(character, at: out.startIndex)
+      extra -= 1
+    }
+
+    return out
+  }
+}
+
 func time(part1: () -> Int, part2: () -> Int, day: Int) {
   let fm = FileManager()
   let path = fm.currentDirectoryPath
-  fm.changeCurrentDirectoryPath("src/day0\(day)")
+  fm.changeCurrentDirectoryPath("src/day\("\(day)".leftpad(length: 2, character: "0"))")
 
   print("DAY \(day)")
   let blue = "\u{001b}[34m"
@@ -37,6 +51,7 @@ let days = [
   5: { time(part1: Day5.part1, part2: Day5.part2, day: 5) },
   6: { time(part1: Day6.part1, part2: Day6.part2, day: 6) },
   7: { time(part1: Day7.part1, part2: Day7.part2, day: 7) },
+  8: { time(part1: Day8.part1, part2: Day8.part2, day: 8) },
 ]
 
 if CommandLine.arguments.count < 2 {
