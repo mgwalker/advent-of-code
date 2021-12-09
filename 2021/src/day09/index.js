@@ -1,15 +1,10 @@
 import run from "aocrunner";
 
 const parseInput = (raw) =>
-  `2199943210
-3987894921
-9856789892
-8767896789
-9899965678`
-    // raw
+  raw
     .trim()
     .split("\n")
-    .map((l) => l.split("").map(Number));
+    .map((l) => l.trim().split("").map(Number));
 
 const part1 = (raw) => {
   const input = parseInput(raw);
@@ -53,17 +48,13 @@ const part2 = (raw) => {
     const height = data[row]?.[column] ?? 9;
 
     if (height < 9) {
-      const { above, below, left, right } = getAdjacent(row, column);
+      basin.push(height);
+      data[row][column] = 9;
 
-      if (height < above && height < below && height < left && height < right) {
-        basin.push(height);
-        data[row][column] = 9;
-
-        basin.push(...getBasin(row - 1, column));
-        basin.push(...getBasin(row + 1, column));
-        basin.push(...getBasin(row, column - 1));
-        basin.push(...getBasin(row, column + 1));
-      }
+      basin.push(...getBasin(row - 1, column));
+      basin.push(...getBasin(row + 1, column));
+      basin.push(...getBasin(row, column - 1));
+      basin.push(...getBasin(row, column + 1));
     }
     return basin;
   };
@@ -72,9 +63,20 @@ const part2 = (raw) => {
   input.forEach((row, r) => {
     row.forEach((height, c) => {
       if (height < 9) {
-        data = [...input];
-        const basin = getBasin(r, c);
-        if (basin.length > 0) {
+        data = JSON.parse(JSON.stringify(input));
+        const { above, below, left, right } = getAdjacent(r, c);
+        if (
+          height < above &&
+          height < below &&
+          height < left &&
+          height < right
+        ) {
+          data[r][c] = 9;
+          const basin = [height];
+          basin.push(...getBasin(r - 1, c));
+          basin.push(...getBasin(r + 1, c));
+          basin.push(...getBasin(r, c - 1));
+          basin.push(...getBasin(r, c + 1));
           basins.push(basin);
         }
       }
