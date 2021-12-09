@@ -72,26 +72,24 @@ enum Day4 {
     fileprivate var boards: [Board] = []
   }
 
-  static func input() -> Input? {
-    do {
-      let data = try String(contentsOfFile: "input.txt").split(separator: "\n").map { String($0) }
-      var out = Input()
+  static func parse(_ contents: String) -> Input? {
+    let data = contents.split(separator: "\n").map { String($0) }
+    var out = Input()
 
-      data[0].split(separator: ",").map { Int($0, radix: 10)! }.forEach { n in out.calls.append(n) }
+    data[0].split(separator: ",").map { Int($0, radix: 10)! }.forEach { n in out.calls.append(n) }
 
-      var line = 1
-      while line < data.count {
-        let lineValue = Array(data[line ..< line + 5])
-        out.boards.append(Board(boardStrings: lineValue))
-        line += 5
-      }
+    var line = 1
+    while line < data.count {
+      let lineValue = Array(data[line ..< line + 5])
+      out.boards.append(Board(boardStrings: lineValue))
+      line += 5
+    }
 
-      return out
-    } catch { return nil }
+    return out
   }
 
-  static func part1() -> Int {
-    let data = input()!
+  static func part1(input: String) -> Int {
+    let data = parse(input)!
 
     var callIndex = 0
     while callIndex < data.calls.count {
@@ -109,8 +107,8 @@ enum Day4 {
     return -1
   }
 
-  static func part2() -> Int {
-    let data = input()!
+  static func part2(input: String) -> Int {
+    let data = parse(input)!
     var boards = data.boards
 
     var lastWinningNumber = -1

@@ -20,7 +20,7 @@ public extension String {
   }
 }
 
-func time(part1: () -> Int, part2: () -> Int, day: Int) {
+func time(part1: (String) -> Int, part2: (String) -> Int, day: Int) {
   let fm = FileManager()
   let path = fm.currentDirectoryPath
   fm.changeCurrentDirectoryPath("src/day\("\(day)".leftpad(length: 2, character: "0"))")
@@ -30,15 +30,21 @@ func time(part1: () -> Int, part2: () -> Int, day: Int) {
   let green = "\u{001b}[0;92m"
   let reset = "\u{001b}[0m"
 
-  let t1 = DispatchTime.now()
-  let p1 = part1()
-  let d1 = Double(DispatchTime.now().uptimeNanoseconds - t1.uptimeNanoseconds) / 1_000_000.0
-  print("  Part 1: \(green)\(p1) \(blue)\(d1) ms\(reset)")
+  do {
+    let input = try String(contentsOfFile: "input.txt")
 
-  let t2 = DispatchTime.now()
-  let p2 = part2()
-  let d2 = Double(DispatchTime.now().uptimeNanoseconds - t2.uptimeNanoseconds) / 1_000_000.0
-  print("  Part 2: \(green)\(p2) \(blue)\(d2) ms\(reset)")
+    let t1 = DispatchTime.now()
+    let p1 = part1(input)
+    let d1 = Double(DispatchTime.now().uptimeNanoseconds - t1.uptimeNanoseconds) / 1_000_000.0
+    print("  Part 1: \(green)\(p1) \(blue)\(d1) ms\(reset)")
+
+    let t2 = DispatchTime.now()
+    let p2 = part2(input)
+    let d2 = Double(DispatchTime.now().uptimeNanoseconds - t2.uptimeNanoseconds) / 1_000_000.0
+    print("  Part 2: \(green)\(p2) \(blue)\(d2) ms\(reset)")
+  } catch {
+    print("  There was an error reading the input file")
+  }
 
   fm.changeCurrentDirectoryPath(path)
 }

@@ -1,19 +1,12 @@
 import Foundation
 
 enum Day2 {
-  static func input() -> [[Substring]] {
-    do {
-      let contents = try String(contentsOfFile: "input.txt")
-      let v = contents.split(separator: "\n").map { $0.split(separator: " ") }
-      return v
-    } catch {
-      print("oh noes")
-      return []
-    }
+  static func parse(_ contents: String) -> [[Substring]] {
+    return contents.split(separator: "\n").map { $0.split(separator: " ") }
   }
 
-  static func part1() -> Int {
-    let data = input()
+  static func part1(input: String) -> Int {
+    let data = parse(input)
     var horizontal = 0, depth = 0
 
     data.forEach { value in
@@ -35,8 +28,8 @@ enum Day2 {
     return horizontal * depth
   }
 
-  static func part2() -> Int {
-    let data = input()
+  static func part2(input: String) -> Int {
+    let data = parse(input)
     var aim = 0, horizontal = 0, depth = 0
 
     data.forEach { value in

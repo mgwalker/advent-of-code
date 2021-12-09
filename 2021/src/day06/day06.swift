@@ -1,19 +1,14 @@
 import Foundation
 
 struct Day6 {
-  static func input() -> [Int] {
-    do {
-      return try String(contentsOfFile: "input.txt")
-        .split(separator: ",")
-        .map { Int($0, radix: 10)! }
-    } catch {
-      print("There was an error loading input")
-      return []
-    }
+  static func parse(_ contents: String) -> [Int] {
+    return contents
+      .split(separator: ",")
+      .map { Int($0, radix: 10)! }
   }
 
-  static func run(days: Int) -> Int {
-    let data = input()
+  static func run(days: Int, input: String) -> Int {
+    let data = parse(input)
     var fishies = [0, 0, 0, 0, 0, 0, 0, 0, 0]
     for fish in data {
       fishies[fish] += 1
@@ -28,11 +23,11 @@ struct Day6 {
     return fishies.reduce(0) { sum, fish in sum + fish }
   }
 
-  static func part1() -> Int {
-    return run(days: 80)
+  static func part1(input: String) -> Int {
+    return run(days: 80, input: input)
   }
 
-  static func part2() -> Int {
-    return run(days: 256)
+  static func part2(input: String) -> Int {
+    return run(days: 256, input: input)
   }
 }

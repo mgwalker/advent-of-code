@@ -64,10 +64,8 @@ private class Line {
 }
 
 enum Day5 {
-  private static func input() -> [Line] {
-    do {
-      return try String(contentsOfFile: "input.txt").split(separator: "\n").map { Line(with: String($0)) }
-    } catch { return [] }
+  private static func parse(_ contents: String) -> [Line] {
+    return contents.split(separator: "\n").map { Line(with: String($0)) }
   }
 
   private static func run(ventLines: [Line]) -> Int {
@@ -85,23 +83,13 @@ enum Day5 {
     return board.values.filter { $0 > 1 }.count
   }
 
-  static func part1() -> Int {
-    let data = input().filter { $0.horizontal() || $0.vertical() }
+  static func part1(input: String) -> Int {
+    let data = parse(input).filter { $0.horizontal() || $0.vertical() }
     return run(ventLines: data)
   }
 
-  static func part2() -> Int {
-    let data = input()
+  static func part2(input: String) -> Int {
+    let data = parse(input)
     return run(ventLines: data)
   }
 }
-
-// print("PART 1:")
-// let t1 = DispatchTime.now()
-// print("  ", Day5.part1())
-// print("  ", Double(DispatchTime.now().uptimeNanoseconds - t1.uptimeNanoseconds) / 1_000_000.0, "ms")
-// print("")
-// print("PART 2:")
-// let t2 = DispatchTime.now()
-// print("  ", Day5.part2())
-// print("  ", Double(DispatchTime.now().uptimeNanoseconds - t2.uptimeNanoseconds) / 1_000_000.0, "ms")

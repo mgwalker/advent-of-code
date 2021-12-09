@@ -1,14 +1,12 @@
 import Foundation
 
 enum Day3 {
-  static func input() -> [Substring] {
-    do {
-      return try String(contentsOfFile: "input.txt").split(separator: "\n")
-    } catch { return [] }
+  static func parse(_ contents: String) -> [Substring] {
+    return contents.split(separator: "\n")
   }
 
-  static func part1() -> Int {
-    let data = input()
+  static func part1(input: String) -> Int {
+    let data = parse(input)
     var gamma = ""
     var epsilon = ""
 
@@ -36,8 +34,8 @@ enum Day3 {
     return Int(gamma, radix: 2)! * Int(epsilon, radix: 2)!
   }
 
-  static func part2() -> Int {
-    let data = input()
+  static func part2(input: String) -> Int {
+    let data = parse(input)
 
     var o2 = data
     var co2 = data
