@@ -12,17 +12,14 @@ const part1 = (raw) => {
   const lowpoints = [];
   input.forEach((row, r) => {
     row.forEach((location, c) => {
-      const above = input[r - 1]?.[c] ?? 9;
-      const below = input[r + 1]?.[c] ?? 9;
-      const left = row[c - 1] ?? 9;
-      const right = row[c + 1] ?? 9;
+      const adjacent = [
+        input[r - 1]?.[c] ?? 9,
+        input[r + 1]?.[c] ?? 9,
+        row[c - 1] ?? 9,
+        row[c + 1] ?? 9,
+      ];
 
-      if (
-        location < above &&
-        location < below &&
-        location < left &&
-        location < right
-      ) {
+      if (location < Math.min(...adjacent)) {
         lowpoints.push(location);
       }
     });
@@ -36,11 +33,12 @@ const part2 = (raw) => {
   let data = [];
 
   const getAdjacent = (row, column) => {
-    const above = data[row - 1]?.[column] ?? 9;
-    const below = data[row + 1]?.[column] ?? 9;
-    const left = data[row]?.[column - 1] ?? 9;
-    const right = data[row]?.[column + 1] ?? 9;
-    return { above, below, left, right };
+    return [
+      data[row - 1]?.[column] ?? 9,
+      data[row + 1]?.[column] ?? 9,
+      data[row]?.[column - 1] ?? 9,
+      data[row]?.[column + 1] ?? 9,
+    ];
   };
 
   const getBasin = (row, column) => {
@@ -64,13 +62,8 @@ const part2 = (raw) => {
     row.forEach((height, c) => {
       if (height < 9) {
         data = JSON.parse(JSON.stringify(input));
-        const { above, below, left, right } = getAdjacent(r, c);
-        if (
-          height < above &&
-          height < below &&
-          height < left &&
-          height < right
-        ) {
+        const neighbors = getAdjacent(r, c);
+        if (height < Math.min(...neighbors)) {
           data[r][c] = 9;
           const basin = [height];
           basin.push(...getBasin(r - 1, c));
