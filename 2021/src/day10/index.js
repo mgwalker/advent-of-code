@@ -68,9 +68,6 @@ const part2 = (raw) => {
 
   scores.sort((a, b) => (a > b ? 1 : a < b ? -1 : 0));
   return scores[Math.floor(scores.length / 2)];
-
-  // 2802519786
-  return;
 };
 
 run({
