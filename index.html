@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>2021 Advent of Code solver</title>
+    <style type="text/css">
+      * {
+        font-family: sans-serif;
+      }
+      textarea {
+        font-family: monospace;
+        width: 90%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>2021 Solver</h1>
+    <p>
+      <select>
+        <option disabled selected>Select a day</option>
+        <option value="01">Day 1</option>
+        <option value="02">Day 2</option>
+        <option value="03">Day 3</option>
+        <option value="04">Day 4</option>
+        <option value="05">Day 5</option>
+        <option value="06">Day 6</option>
+        <option value="07">Day 7</option>
+        <option value="08">Day 8</option>
+        <option value="09">Day 9</option>
+        <option value="10">Day 10</option>
+        <option value="11">Day 11</option>
+      </select>
+    </p>
+
+    <p id="input">
+      Paste your input here:<br />
+      <textarea rows="20" cols="80"></textarea>
+      <br /><br />
+      <button>Go</button>
+      <br /><br />
+      <strong>Part 1:</strong> <span id="part1"></span><br />
+      <strong>Part 2:</strong> <span id="part2"></span><br />
+    </p>
+
+    <script type="module">
+      const inputArea = document.querySelector("#input");
+      const textarea = document.querySelector("#input textarea");
+      const p1 = document.querySelector("#part1");
+      const p2 = document.querySelector("#part2");
+      const parts = [];
+
+      document.querySelector("button").addEventListener("click", () => {
+        const [part1, part2] = parts;
+        const input = textarea.value;
+
+        p1.innerText = part1(input);
+        p2.innerText = part2(input);
+      });
+      inputArea.remove();
+
+      document
+        .querySelector("select")
+        .addEventListener("change", async ({ target: { value } }) => {
+          const { part1, part2 } = await import(
+            `./2021/src/day${value}/day${value}.js`
+          );
+          parts[0] = part1;
+          parts[1] = part2;
+
+          textarea.value = "";
+          p1.innerText = "";
+          p2.innerText = "";
+          document.body.appendChild(inputArea);
+        });
+    </script>
+  </body>
+</html>
