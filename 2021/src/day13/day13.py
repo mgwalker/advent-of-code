@@ -67,8 +67,6 @@ def part2():
         grid = fold(grid, instruction)
 
     print("Part 2")
-    # print("   ", sum([sum([cell for cell in row]) for row in grid]))
-
     for y in range(0, len(grid)):
         print("".join(["█" if x == 1 else " " for x in grid[y]]))
 
