@@ -11,7 +11,8 @@
         width: 90%;
       }
 
-      #part1, #part2 {
+      #part1,
+      #part2 {
         font-family: monospace;
         white-space: pre;
       }
@@ -59,8 +60,16 @@
         const [part1, part2] = parts;
         const input = textarea.value;
 
-        p1.innerText = part1(input);
-        p2.innerText = part2(input);
+        const p1ts = window.performance.now();
+        const p1v = part1(input);
+        const p1t = Math.round(window.performance.now() - p1ts);
+
+        const p2ts = window.performance.now();
+        const p2v = part2(input);
+        const p2t = Math.round(window.performance.now() - p2ts);
+
+        p1.innerText = `${p1v}\n(${p1t} ms)\n`;
+        p2.innerText = `${p2v}\n(${p2t} ms)`;
       });
       inputArea.remove();
 
