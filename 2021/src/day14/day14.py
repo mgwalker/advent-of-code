@@ -40,9 +40,9 @@ def do_the_puzzle(times):
     occurances = defaultdict(lambda: 0)
     for pair in pairs:
         occurances[pair[0]] += pairs[pair]
-        occurances[pair[1]] += pairs[pair]
+    occurances[template[-1]] += 1
 
-    occurances = [math.ceil(occurances[letter] / 2) for letter in occurances]
+    occurances = [occurances[letter] for letter in occurances]
     return max(occurances) - min(occurances)
 
 
