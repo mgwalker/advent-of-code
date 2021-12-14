@@ -173,16 +173,16 @@
     },
     {
       "part1": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "743",
         "attempts": [],
-        "time": null
+        "time": 152.84
       },
       "part2": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "\n███   ██  ███  █     ██  █  █ █  █ █    \n█  █ █  █ █  █ █    █  █ █ █  █  █ █    \n█  █ █    █  █ █    █  █ ██   ████ █    \n███  █    ███  █    ████ █ █  █  █ █    \n█ █  █  █ █    █    █  █ █ █  █  █ █    \n█  █  ██  █    ████ █  █ █  █ █  █ ████ ",
         "attempts": [],
-        "time": null
+        "time": 135.88
       }
     },
     {
