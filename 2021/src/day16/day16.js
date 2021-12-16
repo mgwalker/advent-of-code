@@ -144,7 +144,7 @@ export const part1 = (raw) => {
   return versionSum;
 };
 
-export const part2 = async (raw) => {
+export const part2 = (raw) => {
   const data = input(raw);
   const read = getReader(data);
 
