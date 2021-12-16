@@ -22,19 +22,19 @@
 {([(&lt;{}[&lt;&gt;[]}&gt;{[]{[(&lt;()&gt;
 (((({&lt;&gt;}&lt;{&lt;{&lt;&gt;}{[]{[]{}
 [[&lt;[([]))&lt;([[{}[[()]]]
-[{[{({}]{}}([{[{{{}}([]
+[{[{({}]{}}([{[&#123;&#123;{}}([]
 {&lt;[[]]&gt;}&lt;{[{[{[]{()[[[]
 [&lt;(&lt;(&lt;(&lt;{}))&gt;&lt;([]([]()
-&lt;{([([[(&lt;&gt;()){}]&gt;(&lt;&lt;{{
-&lt;{([{{}}[&lt;[[[&lt;&gt;{}]]]&gt;[]]
+&lt;{([([[(&lt;&gt;()){}]&gt;(&lt;&lt;&#123;&#123;
+&lt;{([&#123;&#123;}}[&lt;[[[&lt;&gt;{}]]]&gt;[]]
 </code></pre>
 <p>Some of the lines aren't corrupted, just incomplete; you can ignore these lines for now. The remaining five lines are corrupted:</p>
 <ul>
 <li><code>{([(&lt;{}[&lt;&gt;[]}&gt;{[]{[(&lt;()&gt;</code> - Expected <code>]</code>, but found <code>}</code> instead.</li>
 <li><code>[[&lt;[([]))&lt;([[{}[[()]]]</code> - Expected <code>]</code>, but found <code>)</code> instead.</li>
-<li><code>[{[{({}]{}}([{[{{{}}([]</code> - Expected <code>)</code>, but found <code>]</code> instead.</li>
+<li><code>[{[{({}]{}}([{[&#123;&#123;{}}([]</code> - Expected <code>)</code>, but found <code>]</code> instead.</li>
 <li><code>[&lt;(&lt;(&lt;(&lt;{}))&gt;&lt;([]([]()</code> - Expected <code>&gt;</code>, but found <code>)</code> instead.</li>
-<li><code>&lt;{([([[(&lt;&gt;()){}]&gt;(&lt;&lt;{{</code> - Expected <code>]</code>, but found <code>&gt;</code> instead.</li>
+<li><code>&lt;{([([[(&lt;&gt;()){}]&gt;(&lt;&lt;&#123;&#123;</code> - Expected <code>]</code>, but found <code>&gt;</code> instead.</li>
 </ul>
 <p>Stop at the first incorrect closing character on each corrupted line.</p>
 <p>Did you know that syntax checkers actually have contests to see who can get the high score for syntax errors in a file? It's true! To calculate the syntax error score for a line, take the <strong>first illegal character</strong> on the line and look it up in the following table:</p>
@@ -57,7 +57,7 @@
 <li><code>[(()[&lt;&gt;])]({[&lt;{&lt;&lt;[]&gt;&gt;(</code> - Complete by adding <code>)}&gt;]})</code>.</li>
 <li><code>(((({&lt;&gt;}&lt;{&lt;{&lt;&gt;}{[]{[]{}</code> - Complete by adding <code>}}&gt;}&gt;))))</code>.</li>
 <li><code>{&lt;[[]]&gt;}&lt;{[{[{[]{()[[[]</code> - Complete by adding <code>]]}}]}]}&gt;</code>.</li>
-<li><code>&lt;{([{{}}[&lt;[[[&lt;&gt;{}]]]&gt;[]]</code> - Complete by adding <code>])}&gt;</code>.</li>
+<li><code>&lt;{([&#123;&#123;}}[&lt;[[[&lt;&gt;{}]]]&gt;[]]</code> - Complete by adding <code>])}&gt;</code>.</li>
 </ul>
 <p>Did you know that autocomplete tools <strong>also</strong> have contests? It's true! The score is determined by considering the completion string character-by-character. Start with a total score of <code>0</code>. Then, for each character, multiply the total score by 5 and then increase the total score by the point value given for the character in the following table:</p>
 <ul>

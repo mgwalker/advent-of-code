@@ -26,7 +26,8 @@ await Promise.all(
 
       const parts = txt
         .match(/<article.*>[\s\S]+?<\/article>/gim)
-        .map((p) => p.replace(/<em.*>([^<]*)<\/em>/gm, "<strong>$1</strong>"));
+        .map((p) => p.replace(/<em.*>([^<]*)<\/em>/gm, "<strong>$1</strong>"))
+        .map((p) => p.replace(/\{\{/g, "&#123;&#123;"));
 
       const readme = `# 🎄 Advent of Code 2021 - day ${day} 🎄
 [Original problem](https://adventofcode.com/2021/day/${day})
