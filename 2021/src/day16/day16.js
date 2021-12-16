@@ -1,5 +1,3 @@
-import fs from "fs/promises";
-
 const input = (raw) => {
   return raw
     .split("")
