@@ -1,5 +1,6 @@
 # 🎄 Advent of Code 2021 - day 11 🎄
-Original problem](https://adventofcode.com/2021/day/11)
+
+[Original problem](https://adventofcode.com/2021/day/11)
 
 <article class="day-desc"><h2>--- Day 11: Dumbo Octopus ---</h2><p>You enter a large cavern full of rare bioluminescent <a href="https://www.youtube.com/watch?v=eih-VSaS2g0" target="_blank">dumbo octopuses</a>! They seem to not like the Christmas lights on your submarine, so you turn them off for now.</p>
 <p>There are 100 <span title="I know it's weird; I grew up saying 'octopi' too.">octopuses</span> arranged neatly in a 10 by 10 grid. Each octopus slowly gains <strong>flashes</strong> brightly for a moment when its energy is full. Although your lights are off, maybe you could navigate through the cave without disturbing the octopuses if you could predict when the flashes of light will happen.</p>
@@ -44,6 +45,7 @@ After step 2:
 51115
 45654
 </code></pre>
+
 <p>An octopus is <strong>highlighted</strong> when it flashed during the given step.</p>
 <p>Here is how the larger example above progresses:</p>
 <pre><code>Before any steps:
@@ -331,5 +333,6 @@ After step 195:
 <strong>0000000000</strong>
 <strong>0000000000</strong>
 </code></pre>
+
 <p>If you can calculate the exact moments when the octopuses will all flash simultaneously, you should be able to navigate through the cavern. <strong>What is the first step during which all octopuses flash?</strong></p>
 </article>

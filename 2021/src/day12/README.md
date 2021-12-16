@@ -1,5 +1,6 @@
 # 🎄 Advent of Code 2021 - day 12 🎄
-Original problem](https://adventofcode.com/2021/day/12)
+
+[Original problem](https://adventofcode.com/2021/day/12)
 
 <article class="day-desc"><h2>--- Day 12: Passage Pathing ---</h2><p>With your <span title="Sublime.">submarine's subterranean subsystems subsisting suboptimally</span>, the only way you're getting out of this cave anytime soon is by finding a path yourself. Not just <strong>all</strong> of them.</p>
 <p>Fortunately, the sensors are still mostly working, and so you build a rough map of the remaining caves (your puzzle input). For example:</p>

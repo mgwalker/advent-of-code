@@ -1,5 +1,6 @@
 # 🎄 Advent of Code 2021 - day 5 🎄
-Original problem](https://adventofcode.com/2021/day/5)
+
+[Original problem](https://adventofcode.com/2021/day/5)
 
 <article class="day-desc"><h2>--- Day 5: Hydrothermal Venture ---</h2><p>You come across a field of <a href="https://en.wikipedia.org/wiki/Hydrothermal_vent" target="_blank">hydrothermal vents</a> on the ocean floor! These vents constantly produce large, opaque clouds, so it would be best to avoid them if possible.</p>
 <p>They tend to form in <strong>lines</strong>; the submarine helpfully produces a list of nearby <span title="Maybe they're Bresenham vents.">lines of vents</span> (your puzzle input) for you to review. For example:</p>

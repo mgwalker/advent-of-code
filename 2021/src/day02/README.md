@@ -1,5 +1,6 @@
 # 🎄 Advent of Code 2021 - day 2 🎄
-Original problem](https://adventofcode.com/2021/day/2)
+
+[Original problem](https://adventofcode.com/2021/day/2)
 
 <article class="day-desc"><h2>--- Day 2: Dive! ---</h2><p>Now, you need to figure out how to <span title="Tank, I need a pilot program for a B212 helicopter.">pilot this thing</span>.</p>
 <p>It seems like the submarine can take a series of commands like <code>forward 1</code>, <code>down 2</code>, or <code>up 3</code>:</p>

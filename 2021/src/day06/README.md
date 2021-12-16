@@ -1,5 +1,6 @@
 # 🎄 Advent of Code 2021 - day 6 🎄
-Original problem](https://adventofcode.com/2021/day/6)
+
+[Original problem](https://adventofcode.com/2021/day/6)
 
 <article class="day-desc"><h2>--- Day 6: Lanternfish ---</h2><p>The sea floor is getting steeper. Maybe the sleigh keys got carried this way?</p>
 <p>A massive school of glowing <a href="https://en.wikipedia.org/wiki/Lanternfish" target="_blank">lanternfish</a> swims past. They must spawn quickly to reach such large numbers - maybe <strong>exponentially</strong> quickly? You should model their growth rate to be sure.</p>

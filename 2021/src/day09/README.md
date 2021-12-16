@@ -1,5 +1,6 @@
 # 🎄 Advent of Code 2021 - day 9 🎄
-Original problem](https://adventofcode.com/2021/day/9)
+
+[Original problem](https://adventofcode.com/2021/day/9)
 
 <article class="day-desc"><h2>--- Day 9: Smoke Basin ---</h2><p>These caves seem to be <a href="https://en.wikipedia.org/wiki/Lava_tube" target="_blank">lava tubes</a>. Parts are even still volcanically active; small hydrothermal vents release smoke into the caves that slowly <span title="This was originally going to be a puzzle about watersheds, but we're already under water.">settles like rain</span>.</p>
 <p>If you can model how the smoke flows through the caves, you might be able to avoid it and be that much safer. The submarine generates a heightmap of the floor of the nearby caves for you (your puzzle input).</p>

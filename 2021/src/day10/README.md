@@ -1,5 +1,6 @@
 # 🎄 Advent of Code 2021 - day 10 🎄
-Original problem](https://adventofcode.com/2021/day/10)
+
+[Original problem](https://adventofcode.com/2021/day/10)
 
 <article class="day-desc"><h2>--- Day 10: Syntax Scoring ---</h2><p>You ask the submarine to determine the best route out of the deep-sea cave, but it only replies:</p>
 <pre><code>Syntax error in navigation subsystem on line: <span title="Some days, that's just how it is.">all of them</span></code></pre>

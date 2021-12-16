@@ -1,5 +1,6 @@
 # 🎄 Advent of Code 2021 - day 8 🎄
-Original problem](https://adventofcode.com/2021/day/8)
+
+[Original problem](https://adventofcode.com/2021/day/8)
 
 <article class="day-desc"><h2>--- Day 8: Seven Segment Search ---</h2><p>You barely reach the safety of the cave when the whale smashes into the cave mouth, collapsing it. Sensors indicate another exit to this cave at a much greater depth, so you have no choice but to press on.</p>
 <p>As your submarine slowly makes its way through the cave system, you notice that the four-digit <a href="https://en.wikipedia.org/wiki/Seven-segment_display" target="_blank">seven-segment displays</a> in your submarine are malfunctioning; <span title="Yes, just the four-digit seven-segment ones. Whole batch must have been faulty.">they must have been damaged</span> during the escape. You'll be in a lot of trouble without them, so you'd better figure out what's wrong.</p>
@@ -13,15 +14,16 @@ Original problem](https://adventofcode.com/2021/day/8)
 <strong>f</strong>
  <strong>gggg    gggg</strong>    ....
 
-  5:      6:      7:      8:      9:
- <strong>aaaa    aaaa    aaaa    aaaa    aaaa</strong>
-<strong>c  b    c  b    c</strong>
-<strong>c  b    c  b    c</strong>
- <strong>dddd    dddd</strong>
-.    <strong>f</strong>
-.    <strong>f</strong>
- <strong>gggg    gggg</strong>
+5: 6: 7: 8: 9:
+<strong>aaaa aaaa aaaa aaaa aaaa</strong>
+<strong>c b c b c</strong>
+<strong>c b c b c</strong>
+<strong>dddd dddd</strong>
+. <strong>f</strong>
+. <strong>f</strong>
+<strong>gggg gggg</strong>
 </code></pre>
+
 <p>So, to render a <code>1</code>, only segments <code>c</code> and <code>f</code> would be turned on; the rest would be off. To render a <code>7</code>, only segments <code>a</code>, <code>c</code>, and <code>f</code> would be turned on.</p>
 <p>The problem is that the signals which control the segments have been mixed up on each display. The submarine is still trying to display numbers by producing output on signal wires <code>a</code> through <code>g</code>, but those wires are connected to segments <strong>within</strong> a display use the same connections, though.)</p>
 <p>So, you might know that only signal wires <code>b</code> and <code>g</code> are turned on, but that doesn't mean <strong>segments</strong> <code>b</code> and <code>g</code> are turned on: the only digit that uses two segments is <code>1</code>, so it must mean segments <code>c</code> and <code>f</code> are meant to be on. With just that information, you still can't tell which wire (<code>b</code>/<code>g</code>) goes to which segment (<code>c</code>/<code>f</code>). For that, you'll need to collect more information.</p>

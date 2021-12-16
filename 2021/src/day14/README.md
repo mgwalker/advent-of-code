@@ -1,5 +1,6 @@
 # 🎄 Advent of Code 2021 - day 14 🎄
-Original problem](https://adventofcode.com/2021/day/14)
+
+[Original problem](https://adventofcode.com/2021/day/14)
 
 <article class="day-desc"><h2>--- Day 14: Extended Polymerization ---</h2><p>The incredible pressures at this depth are starting to put a strain on your submarine. The submarine has <a href="https://en.wikipedia.org/wiki/Polymerization" target="_blank">polymerization</a> equipment that would produce suitable materials to reinforce the submarine, and the nearby volcanically-active caves should even have the necessary input elements in sufficient quantities.</p>
 <p>The submarine manual contains <span title="HO&#xa;&#xa;HO -&gt; OH">instructions</span> for finding the optimal polymer formula; specifically, it offers a <strong>pair insertion</strong> rules (your puzzle input). You just need to work out what polymer would result after repeating the pair insertion process a few times.</p>
@@ -23,6 +24,7 @@ BC -&gt; B
 CC -&gt; N
 CN -&gt; C
 </code></pre>
+
 <p>The first line is the <strong>polymer template</strong> - this is the starting point of the process.</p>
 <p>The following section defines the <strong>pair insertion</strong> rules. A rule like <code>AB -&gt; C</code> means that when elements <code>A</code> and <code>B</code> are immediately adjacent, element <code>C</code> should be inserted between them. These insertions all happen simultaneously.</p>
 <p>So, starting with the polymer template <code>NNCB</code>, the first step simultaneously considers all three pairs:</p>

@@ -1,5 +1,6 @@
 # 🎄 Advent of Code 2021 - day 3 🎄
-Original problem](https://adventofcode.com/2021/day/3)
+
+[Original problem](https://adventofcode.com/2021/day/3)
 
 <article class="day-desc"><h2>--- Day 3: Binary Diagnostic ---</h2><p>The submarine has been making some <span title="Turns out oceans are heavy.">odd creaking noises</span>, so you ask it to produce a diagnostic report just in case.</p>
 <p>The diagnostic report (your puzzle input) consists of a list of binary numbers which, when decoded properly, can tell you many useful things about the conditions of the submarine. The first parameter to check is the <strong>power consumption</strong>.</p>

@@ -1,5 +1,6 @@
 # 🎄 Advent of Code 2021 - day 13 🎄
-Original problem](https://adventofcode.com/2021/day/13)
+
+[Original problem](https://adventofcode.com/2021/day/13)
 
 <article class="day-desc"><h2>--- Day 13: Transparent Origami ---</h2><p>You reach another volcanically active part of the cave. It would be nice if you could do some kind of thermal imaging so you could tell ahead of time which caves are too hot to safely enter.</p>
 <p>Fortunately, the submarine seems to be equipped with a thermal camera! When you activate it, you are greeted with:</p>
@@ -29,6 +30,7 @@ camera system, please enter the code found on page 1 of the manual.
 fold along y=7
 fold along x=5
 </code></pre>
+
 <p>The first section is a list of dots on the transparent paper. <code>0,0</code> represents the top-left coordinate.  The first value, <code>x</code>, increases to the right.  The second value, <code>y</code>, increases downward.  So, the coordinate <code>3,0</code> is to the right of <code>0,0</code>, and the coordinate <code>0,7</code> is below <code>0,0</code>. The coordinates in this example form the following pattern, where <code>#</code> is a dot on the paper and <code>.</code> is an empty, unmarked position:</p>
 <pre><code>...#..#..#.
 ....#......

@@ -29,7 +29,7 @@ await Promise.all(
         .map((p) => p.replace(/<em.*>([^<]*)<\/em>/gm, "<strong>$1</strong>"));
 
       const readme = `# 🎄 Advent of Code 2021 - day ${day} 🎄
-Original problem](https://adventofcode.com/2021/day/${day})
+[Original problem](https://adventofcode.com/2021/day/${day})
 
 ${parts.join("\n\n")}
 `;
