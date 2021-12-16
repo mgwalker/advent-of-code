@@ -8,15 +8,15 @@
         "solved": true,
         "result": "1292",
         "attempts": [],
-        "time": 0.47
+        "time": 0.47,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "1262",
-        "attempts": [
-          "1996"
-        ],
-        "time": 0.78
+        "attempts": ["1996"],
+        "time": 0.78,
+        "readme": true
       }
     },
     {
@@ -24,13 +24,15 @@
         "solved": true,
         "result": "1746616",
         "attempts": [],
-        "time": 0.81
+        "time": 0.81,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "1741971043",
         "attempts": [],
-        "time": 0.47
+        "time": 0.47,
+        "readme": true
       }
     },
     {
@@ -38,13 +40,15 @@
         "solved": true,
         "result": "4160394",
         "attempts": [],
-        "time": 1.19
+        "time": 1.19,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "4125600",
         "attempts": [],
-        "time": 0.76
+        "time": 0.76,
+        "readme": true
       }
     },
     {
@@ -52,15 +56,15 @@
         "solved": true,
         "result": "58412",
         "attempts": [],
-        "time": 3.58
+        "time": 3.58,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "10030",
-        "attempts": [
-          "37425"
-        ],
-        "time": 4.61
+        "attempts": ["37425"],
+        "time": 4.61,
+        "readme": true
       }
     },
     {
@@ -68,13 +72,15 @@
         "solved": true,
         "result": "5197",
         "attempts": [],
-        "time": 39.84
+        "time": 39.84,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "18605",
         "attempts": [],
-        "time": 55.98
+        "time": 55.98,
+        "readme": true
       }
     },
     {
@@ -82,13 +88,15 @@
         "solved": true,
         "result": "349549",
         "attempts": [],
-        "time": 0.07
+        "time": 0.07,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "1589590444365",
         "attempts": [],
-        "time": 0.05
+        "time": 0.05,
+        "readme": true
       }
     },
     {
@@ -96,13 +104,15 @@
         "solved": true,
         "result": "328262",
         "attempts": [],
-        "time": 14.74
+        "time": 14.74,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "90040997",
         "attempts": [],
-        "time": 14.76
+        "time": 14.76,
+        "readme": true
       }
     },
     {
@@ -110,13 +120,15 @@
         "solved": true,
         "result": "445",
         "attempts": [],
-        "time": 0.6
+        "time": 0.6,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "1043101",
         "attempts": [],
-        "time": 6.97
+        "time": 6.97,
+        "readme": true
       }
     },
     {
@@ -124,15 +136,15 @@
         "solved": true,
         "result": "436",
         "attempts": [],
-        "time": 1.71
+        "time": 1.71,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "1317792",
-        "attempts": [
-          "764469"
-        ],
-        "time": 1087.61
+        "attempts": ["764469"],
+        "time": 1087.61,
+        "readme": true
       }
     },
     {
@@ -140,13 +152,15 @@
         "solved": true,
         "result": "168417",
         "attempts": [],
-        "time": 1.46
+        "time": 1.46,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "2802519786",
         "attempts": [],
-        "time": 1.01
+        "time": 1.01,
+        "readme": true
       }
     },
     {
@@ -154,13 +168,15 @@
         "solved": true,
         "result": "1700",
         "attempts": [],
-        "time": 12.91
+        "time": 12.91,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "273",
         "attempts": [],
-        "time": 23.04
+        "time": 23.04,
+        "readme": true
       }
     },
     {
@@ -168,13 +184,15 @@
         "solved": true,
         "result": "4749",
         "attempts": [],
-        "time": 27.78
+        "time": 27.78,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "123054",
         "attempts": [],
-        "time": 572.42
+        "time": 572.42,
+        "readme": true
       }
     },
     {
@@ -182,13 +200,15 @@
         "solved": true,
         "result": "743",
         "attempts": [],
-        "time": 152.84
+        "time": 152.84,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "\n███   ██  ███  █     ██  █  █ █  █ █    \n█  █ █  █ █  █ █    █  █ █ █  █  █ █    \n█  █ █    █  █ █    █  █ ██   ████ █    \n███  █    ███  █    ████ █ █  █  █ █    \n█ █  █  █ █    █    █  █ █ █  █  █ █    \n█  █  ██  █    ████ █  █ █  █ █  █ ████ ",
         "attempts": [],
-        "time": 135.88
+        "time": 135.88,
+        "readme": true
       }
     },
     {
@@ -196,31 +216,31 @@
         "solved": true,
         "result": "3143",
         "attempts": [],
-        "time": 0.79
+        "time": 0.79,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "4110215602456",
         "attempts": [],
-        "time": 2.34
+        "time": 2.34,
+        "readme": true
       }
     },
     {
       "part1": {
         "solved": true,
         "result": "589",
-        "attempts": [
-          "40"
-        ],
-        "time": 68.56
+        "attempts": ["40"],
+        "time": 68.56,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "2885",
-        "attempts": [
-          "4673"
-        ],
-        "time": 4080.2
+        "attempts": ["4673"],
+        "time": 4080.2,
+        "readme": true
       }
     },
     {
