@@ -1,5 +1,5 @@
 import run from "aocrunner";
-import { part1, part2 } from "./day08.js";
+import { part1, part2 } from "./day08-threads.js";
 
 run({
   part1: { solution: part1 },

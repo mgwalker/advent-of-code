@@ -1,4 +1,4 @@
-import { Worker } from "worker_threads";
+import { StaticPool } from "node-worker-threads-pool";
 import path from "path";
 
 const parseInput = (raw) =>
@@ -32,29 +32,27 @@ export const part2 = async (raw) => {
 
   const workerPath = path.join(
     path.dirname(new URL(import.meta.url).pathname),
-    "day08-solver.js",
+    "day08-worker.js",
   );
 
+  const threads = new StaticPool({
+    size: 16,
+    task: workerPath,
+  });
+
   await Promise.all(
-    lines.map((line, i) => {
-      return new Promise((resolve, reject) => {
-        const worker = new Worker(workerPath, { workerData: { line } });
-        worker.on("error", (e) => {
-          console.log(e);
-          reject();
-        });
-        worker.on("exit", () => reject());
-        worker.on("message", (mapping) => {
-          const output = +outputs[i]
-            .map((o) => o.split("").sort().join(""))
-            .map((o) => mapping.get(o))
-            .join("");
-          computed.push(output);
-          resolve();
-        });
-      });
+    lines.map(async (line, i) => {
+      const mapping = await threads.exec(line);
+
+      const output = +outputs[i]
+        .map((o) => o.split("").sort().join(""))
+        .map((o) => mapping.get(o))
+        .join("");
+      computed.push(output);
     }),
   );
+
+  threads.destroy();
 
   return computed.reduce((sum, output) => sum + output, 0);
 };
