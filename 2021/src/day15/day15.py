@@ -1,10 +1,11 @@
 import networkx as nx
+import time
+
+raw = open("input.txt", "r").read()
 
 
 def input():
-    return [
-        [int(x) for x in line] for line in open("input.txt", "r").read().splitlines()
-    ]
+    return [[int(x) for x in line] for line in raw.splitlines()]
 
 
 def make_graph(table):
@@ -40,14 +41,12 @@ def get_shortest_path(table):
 
 
 def part1():
-    print("Part 1")
     table = input()
     lowest_risk = get_shortest_path(table)
-    print("   ", lowest_risk)
+    return lowest_risk
 
 
 def part2():
-    print("Part 2")
     table = input()
 
     for row in table:
@@ -59,8 +58,20 @@ def part2():
     for i in range(0, 4):
         table.extend([[(risk + i) % 9 + 1 for risk in row] for row in rows])
 
-    print("   ", get_shortest_path(table))
+    return get_shortest_path(table)
 
 
-part1()
-part2()
+print("Part 1")
+t1 = time.time()
+sol = part1()
+t2 = time.time()
+print("   ", sol)
+print("   ", round(1000 * (t2 - t1), 3), "ms")
+print()
+
+print("Part 2")
+t1 = time.time()
+sol = part2()
+t2 = time.time()
+print("   ", sol)
+print("   ", round(1000 * (t2 - t1), 3), "ms")
