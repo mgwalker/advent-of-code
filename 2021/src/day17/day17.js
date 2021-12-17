@@ -32,12 +32,29 @@ class Probe {
     this.#velocity[1] -= 1;
   }
 
-  isIn([x1, x2], [y1, y2]) {
+  isIn({ x1, x2, y1, y2 }) {
     const [x, y] = this.#position;
     if (x >= x1 && x <= x2 && y >= y1 && y <= y2) {
       return true;
     }
     return false;
+  }
+
+  keepGoing({ x1, x2, y1 }) {
+    const [x, y] = this.#position;
+    const [vx, vy] = this.#velocity;
+
+    if (vx === 0) {
+      if (x < x1 || x > x2) {
+        return false;
+      }
+    }
+    if (vy < 0) {
+      if (y < y1) {
+        return false;
+      }
+    }
+    return true;
   }
 
   get position() {
@@ -49,11 +66,8 @@ class Probe {
   }
 }
 
-export const part1 = (raw) => {
-  const data = input(raw);
-
-  // We want to minimize the x velocity to maximize the y velocity, and we
-  // can calculate the minimum X velocity required to reach the target zone.
+const getMinXVelocity = (x1, x2) => {
+  // We can calculate the minimum X velocity required to reach the target zone:
   // x + (x - 1) + (x - 2) + (x - 3) ... + (x -n) = (x * (x + 1)) / 2
   //
   // Minimizing, we want:
@@ -71,130 +85,64 @@ export const part1 = (raw) => {
   // values, we know the velocity must be positive, which means we can safely
   // ignore the subtraction part of the quadratic and just go with the addition.
   // And we're doing integer math, so we can take the ceiling.
-  const minXVelocity =
+  return (
     Math.ceil(
-      (-1 + Math.sqrt(1 + 8 * Math.min(Math.abs(data.x1), Math.abs(data.x2)))) /
-        2,
-    ) * (data.x1 < 0 ? -1 : 1);
+      (-1 + Math.sqrt(1 + 8 * Math.min(Math.abs(x1), Math.abs(x2)))) / 2,
+    ) * (x1 < 0 ? -1 : 1)
+  );
+};
 
-  const keepGoing = (probe) => {
-    const [x, y] = probe.position;
-    const [vx, vy] = probe.velocity;
+const checkYs = (forX, data) => {
+  let maxHeight = -Infinity;
+  const maxY = Math.max(Math.abs(data.y1), Math.abs(data.y2));
 
-    if (vx === 0) {
-      if (x < data.x1 || x > data.x2) {
-        return false;
-      }
-    }
-    if (vy < 0) {
-      if (y < data.y1) {
-        return false;
-      }
-    }
-    return true;
-  };
+  const velocitiesThatHit = [];
 
-  const range = [
-    [data.x1, data.x2],
-    [data.y1, data.y2],
-  ];
-
-  const ys = [];
-
-  let y = 0;
-
-  while (y < 200) {
+  let y = (Math.abs(data.y1) + 1) * (data.y1 < 0 ? -1 : 1);
+  while (y < maxY) {
     y += 1;
 
-    const velocity = [minXVelocity, y];
+    const velocity = [forX, y];
     const probe = new Probe(velocity);
-    const myYs = [];
+    const myHeights = [];
 
-    while (keepGoing(probe)) {
+    while (probe.keepGoing(data)) {
       probe.step();
-      myYs.push([probe.position[1], velocity]);
-      if (probe.isIn(...range)) {
-        ys.push(...myYs);
+      myHeights.push(probe.position[1]);
+
+      if (probe.isIn(data)) {
+        velocitiesThatHit.push(velocity);
+        const localMaxHeight = Math.max(...myHeights);
+        if (localMaxHeight > maxHeight) {
+          maxHeight = localMaxHeight;
+        }
         break;
       }
     }
   }
 
-  return Math.max(...ys.map(([y]) => y));
+  return [maxHeight, velocitiesThatHit];
+};
+
+export const part1 = (raw) => {
+  const data = input(raw);
+
+  const x = getMinXVelocity(data.x1, data.x2);
+
+  const [maxHeight] = checkYs(x, data);
+  return maxHeight;
 };
 
 export const part2 = (raw) => {
   const data = input(raw);
 
-  // We want to minimize the x velocity to maximize the y velocity, and we
-  // can calculate the minimum X velocity required to reach the target zone.
-  // x + (x - 1) + (x - 2) + (x - 3) ... + (x -n) = (x * (x + 1)) / 2
-  //
-  // Minimizing, we want:
-  //   (x * (x + 1)) / 2 = Xmin
-  //   x^2 + x = 2 * Xmin
-  //   x^2 + x - 2Xmin = 0
-  //
-  // Quadratic:
-  //  x = (-b +- root(b^2 - 4ac)) / 2a
-  //  x = (-1 +- root(1 - 4(-2*Xmin))) / 2
-  //  x = (-1 +- root(1 + (8 * Xmin))) / 2
-  //
-  // For minX, we'll use the absolute distance to the nearest X edge, and we'll
-  // adjust the value of X afterwards accordingly. Because we're using absolute
-  // values, we know the velocity must be positive, which means we can safely
-  // ignore the subtraction part of the quadratic and just go with the addition.
-  // And we're doing integer math, so we can take the ceiling.
-  const minXVelocity =
-    Math.ceil(
-      (-1 + Math.sqrt(1 + 8 * Math.min(Math.abs(data.x1), Math.abs(data.x2)))) /
-        2,
-    ) * (data.x1 < 0 ? -1 : 1);
-
-  const keepGoing = (probe) => {
-    const [x, y] = probe.position;
-    const [vx, vy] = probe.velocity;
-
-    if (vx === 0) {
-      if (x < data.x1 || x > data.x2) {
-        return false;
-      }
-    }
-    if (vy < 0) {
-      if (y < data.y1) {
-        return false;
-      }
-    }
-    return true;
-  };
-
-  const range = [
-    [data.x1, data.x2],
-    [data.y1, data.y2],
-  ];
-
   const velocities = [];
+  let x = getMinXVelocity(data.x1, data.x2) - 1;
 
-  let y = 0;
-  let x = minXVelocity - 1;
-
-  while (x < minXVelocity * 20) {
+  while (x < data.x2) {
     x += 1;
-    y = data.y1 - 1;
-    while (y < 200) {
-      y += 1;
-
-      const velocity = [x, y];
-      const probe = new Probe(velocity);
-
-      while (keepGoing(probe)) {
-        probe.step();
-        if (probe.isIn(...range)) {
-          velocities.push(velocity);
-          break;
-        }
-      }
-    }
+    const [, velocitiesThatHit] = checkYs(x, data);
+    velocities.push(...velocitiesThatHit);
   }
 
   return velocities.length;
