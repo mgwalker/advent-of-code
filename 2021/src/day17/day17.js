@@ -139,7 +139,7 @@ export const part2 = (raw) => {
   const velocities = [];
   let x = getMinXVelocity(data.x1, data.x2) - 1;
 
-  while (x < data.x2) {
+  while (x <= data.x2) {
     x += 1;
     const [, velocitiesThatHit] = checkYs(x, data);
     velocities.push(...velocitiesThatHit);
