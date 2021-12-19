@@ -1,4 +1,17 @@
+import { StaticPool } from "node-worker-threads-pool";
+import path from "path";
 import { magnitude, reduce } from "./fns.js";
+
+const workerPath = path.join(
+  path.dirname(new URL(import.meta.url).pathname),
+  "day18-worker.js",
+);
+
+const THREAD_COUNT = 6;
+const threads = new StaticPool({
+  size: THREAD_COUNT,
+  task: workerPath,
+});
 
 const input = (raw) => raw.split("\n");
 
@@ -17,7 +30,7 @@ export const part1 = (raw) => {
   return magnitude(JSON.parse(line));
 };
 
-export const part2 = (raw) => {
+export const part2 = async (raw) => {
   const data = input(raw);
 
   // Build all the permutations of pairs of snailfish numbers.
@@ -30,6 +43,18 @@ export const part2 = (raw) => {
     }
   }
 
+  const pairsPerThread = Math.ceil(pairs.length / THREAD_COUNT);
+
+  const magnitudes = await Promise.all(
+    [...Array(THREAD_COUNT)].map((_, i) => {
+      const start = i * pairsPerThread;
+      const stop = start + pairsPerThread;
+      return threads.exec(pairs.slice(start, stop));
+    }),
+  );
+
+  threads.destroy();
+
   // Reduce each pair, then compute their magnitudes, and get the biggest one.
-  return Math.max(...pairs.map(reduce).map((s) => magnitude(JSON.parse(s))));
+  return Math.max(...magnitudes.flat());
 };

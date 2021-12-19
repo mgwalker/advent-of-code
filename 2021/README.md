@@ -189,8 +189,8 @@ Both parts: 35.910000000000004ms
 ```
 Day 18
 Time part 1: 52.68ms
-Time part 2: 516.6ms
-Both parts: 569.28ms
+Time part 2: 156.86ms
+Both parts: 209.54ms
 ```
 
 ```
