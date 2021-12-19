@@ -316,13 +316,15 @@
           "453",
           "448"
         ],
-        "time": 1241.64
+        "time": 1241.64,
+        "readme": true
       },
       "part2": {
         "solved": true,
         "result": "9655",
         "attempts": [],
-        "time": 0.26
+        "time": 0.26,
+        "readme": true
       }
     },
     {

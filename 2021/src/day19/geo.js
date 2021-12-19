@@ -1,10 +1,9 @@
-export class Point {
+export class Vector {
   #_x;
   #_y;
   #_z;
 
-  constructor(coordinateString) {
-    const [x, y, z] = coordinateString.split(",").map(Number);
+  constructor(x, y, z) {
     this._x = x;
     this._y = y;
     this._z = z;
@@ -20,8 +19,61 @@ export class Point {
     return this._z;
   }
 
+  isSameVector(otherVector) {
+    return (
+      this.x === otherVector.x &&
+      this.y === otherVector.y &&
+      this.z === otherVector.z
+    );
+  }
+}
+
+export class Point {
+  #_x;
+  #_y;
+  #_z;
+
+  constructor(coordinateString, ny, nz) {
+    if (typeof coordinateString === "string") {
+      const [x, y, z] = coordinateString.split(",").map(Number);
+      this._x = x;
+      this._y = y;
+      this._z = z;
+    } else {
+      this._x = coordinateString;
+      this._y = ny;
+      this._z = nz;
+    }
+  }
+
+  get x() {
+    return this._x;
+  }
+  get y() {
+    return this._y;
+  }
+  get z() {
+    return this._z;
+  }
+
   toString() {
     return `${this.x},${this.y},${this.z}`;
+  }
+
+  getVectorTo(point) {
+    return new Vector(this.x - point.x, this.y - point.y, this.z - point.z);
+  }
+
+  withTranslation(dx, dy, dz) {
+    return new Point(this.x + dx, this.y + dy, this.z + dz);
+  }
+
+  manhattanDistanceTo(point) {
+    return (
+      Math.abs(this.x - point.x) +
+      Math.abs(this.y - point.y) +
+      Math.abs(this.z - point.z)
+    );
   }
 }
 
@@ -82,89 +134,89 @@ export class Triangle {
       if (this.ab === other.ab) {
         if (this.bc === other.bc) {
           // AB ab | BC bc | CA ca
-          pointMapping.push([
+          pointMapping.push(
             [this.a, other.a],
             [this.b, other.b],
             [this.c, other.c],
-          ]);
+          );
         } else if (this.bc === other.ca) {
           // AB ab | BC ca | CA bc
-          pointMapping.push([
+          pointMapping.push(
             [this.a, other.a],
             [this.b, other.c],
             [this.c, other.b],
-          ]);
+          );
         }
       } else if (this.ab === other.bc) {
         // AB bc
         if (this.bc === other.ab) {
           // AB bc | BC ab | CA ca
-          pointMapping.push([
+          pointMapping.push(
             [this.a, other.c],
             [this.b, other.b],
             [this.c, other.a],
-          ]);
+          );
         } else {
           // AB bc | BC ca | CA ab
-          pointMapping.push([
+          pointMapping.push(
             [this.a, other.b],
             [this.b, other.c],
             [this.c, other.a],
-          ]);
+          );
         }
       } else if (this.ab === other.ca) {
         // AB ca
         if (this.bc === other.bc) {
           // AB ca | BC bc | CA ab
-          pointMapping.push([
+          pointMapping.push(
             [this.a, other.a],
             [this.b, other.c],
             [this.c, other.b],
-          ]);
+          );
         } else {
           // AB ca | BC ab | CA bc
-          pointMapping.push([
+          pointMapping.push(
             [this.a, other.c],
             [this.b, other.a],
             [this.c, other.b],
-          ]);
+          );
         }
       }
 
-      return [same, pointMapping];
+      return pointMapping;
     }
-    return [same, false];
+    return false;
   }
 }
 
 export function* rotations() {
-  yield (point) => `${point.x}, ${point.y}, ${point.z}`;
-  yield (point) => `${point.x}, ${-point.z}, ${point.y}`;
-  yield (point) => `${point.x}, ${-point.y}, ${-point.z}`;
-  yield (point) => `${point.x}, ${point.z}, ${-point.y}`;
+  yield (point) => new Point(point.x, point.y, point.z);
+  yield (point) => new Point(point.x, -point.z, point.y);
+  yield (point) => new Point(point.x, -point.y, -point.z);
+  yield (point) => new Point(point.x, point.z, -point.y);
 
-  yield (point) => `${-point.y}, ${point.x}, ${point.z}`;
-  yield (point) => `${point.z}, ${point.x}, ${point.y}`;
-  yield (point) => `${point.y}, ${point.x}, ${-point.z}`;
-  yield (point) => `${-point.z}, ${point.x}, ${-point.y}`;
+  yield (point) => new Point(-point.y, point.x, point.z);
+  yield (point) => new Point(point.z, point.x, point.y);
+  yield (point) => new Point(point.y, point.x, -point.z);
+  yield (point) => new Point(-point.z, point.x, -point.y);
 
-  yield (point) => `${-point.x}, ${-point.y}, ${point.z}`;
-  yield (point) => `${-point.x}, ${-point.z}, ${-point.y}`;
-  yield (point) => `${-point.x}, ${point.y}, ${-point.z}`;
-  yield (point) => `${-point.x}, ${point.z}, ${point.y}`;
+  yield (point) => new Point(-point.x, -point.y, point.z);
+  yield (point) => new Point(-point.x, -point.z, -point.y);
+  yield (point) => new Point(-point.x, point.y, -point.z);
+  yield (point) => new Point(-point.x, point.z, point.y);
 
-  yield (point) => `${point.y}, ${-point.x}, ${point.z}`;
-  yield (point) => `${point.z}, ${-point.x}, ${-point.y}`;
-  yield (point) => `${-point.y}, ${-point.x}, ${-point.z}`;
-  yield (point) => `${-point.z}, ${-point.x}, ${point.y}`;
+  yield (point) => new Point(point.y, -point.x, point.z);
+  yield (point) => new Point(point.z, -point.x, -point.y);
+  yield (point) => new Point(-point.y, -point.x, -point.z);
+  yield (point) => new Point(-point.z, -point.x, point.y);
 
-  yield (point) => `${-point.z}, ${point.y}, ${point.x}`;
-  yield (point) => `${point.y}, ${point.z}, ${point.x}`;
-  yield (point) => `${point.z}, ${-point.y}, ${point.x}`;
-  yield (point) => `${-point.y}, ${-point.z}, ${point.x}`;
+  yield (point) => new Point(-point.z, point.y, point.x);
+  yield (point) => new Point(point.y, point.z, point.x);
+  yield (point) => new Point(point.z, -point.y, point.x);
+  yield (point) => new Point(-point.y, -point.z, point.x);
 
-  yield (point) => `${-point.z}, ${-point.y}, ${-point.x}`;
-  yield (point) => `${-point.y}, ${point.z}, ${-point.x}`;
-  yield (point) => `${point.z}, ${point.y}, ${-point.x}`;
-  yield (point) => `${point.y}, ${-point.z}, ${-point.x}`;
+  yield (point) => new Point(-point.z, -point.y, -point.x);
+  yield (point) => new Point(-point.y, point.z, -point.x);
+  yield (point) => new Point(point.z, point.y, -point.x);
+  yield (point) => new Point(point.y, -point.z, -point.x);
 }
