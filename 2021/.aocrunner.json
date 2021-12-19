@@ -296,14 +296,14 @@
         "solved": true,
         "result": "4365",
         "attempts": [],
-        "time": 58.15,
+        "time": 61.82,
         "readme": true
       },
       "part2": {
         "solved": true,
         "result": "4490",
         "attempts": [],
-        "time": 156.86,
+        "time": 175.08,
         "readme": true
       }
     },
