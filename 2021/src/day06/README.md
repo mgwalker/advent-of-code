@@ -1,5 +1,4 @@
 # 🎄 Advent of Code 2021 - day 6 🎄
-
 [Original problem](https://adventofcode.com/2021/day/6)
 
 <article class="day-desc"><h2>--- Day 6: Lanternfish ---</h2><p>The sea floor is getting steeper. Maybe the sleigh keys got carried this way?</p>
@@ -15,7 +14,7 @@
 <li>After another day, its internal timer would reset to <code>6</code>, and it would create a <strong>new</strong> lanternfish with an internal timer of <code>8</code>.</li>
 <li>After another day, the first lanternfish would have an internal timer of <code>5</code>, and the second lanternfish would have an internal timer of <code>7</code>.</li>
 </ul>
-<p>A lanternfish that creates a new fish resets its timer to <code>6</code>, <strong></strong> (because <code>0</code> is included as a valid timer value). The new lanternfish starts with an internal timer of <code>8</code> and does not start counting down until the next day.</p>
+<p>A lanternfish that creates a new fish resets its timer to <code>6</code>, <em>not <code>7</code></em> (because <code>0</code> is included as a valid timer value). The new lanternfish starts with an internal timer of <code>8</code> and does not start counting down until the next day.</p>
 <p>Realizing what you're trying to do, the submarine automatically produces a list of the ages of several hundred nearby lanternfish (your puzzle input). For example, suppose you were given the following list:</p>
 <pre><code>3,4,3,1,2</code></pre>
 <p>This list means that the first fish has an internal timer of <code>3</code>, the second fish has an internal timer of <code>4</code>, and so on until the fifth fish, which has an internal timer of <code>2</code>. Simulating these fish over several days would proceed as follows:</p>

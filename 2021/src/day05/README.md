@@ -1,5 +1,4 @@
 # 🎄 Advent of Code 2021 - day 5 🎄
-
 [Original problem](https://adventofcode.com/2021/day/5)
 
 <article class="day-desc"><h2>--- Day 5: Hydrothermal Venture ---</h2><p>You come across a field of <a href="https://en.wikipedia.org/wiki/Hydrothermal_vent" target="_blank">hydrothermal vents</a> on the ocean floor! These vents constantly produce large, opaque clouds, so it would be best to avoid them if possible.</p>
@@ -34,7 +33,7 @@
 222111....
 </code></pre>
 <p>In this diagram, the top left corner is <code>0,0</code> and the bottom right corner is <code>9,9</code>. Each position is shown as <strong>the number of lines which cover that point</strong> or <code>.</code> if no line covers that point. The top-left pair of <code>1</code>s, for example, comes from <code>2,2 -&gt; 2,1</code>; the very bottom row is formed by the overlapping lines <code>0,9 -&gt; 5,9</code> and <code>0,9 -&gt; 2,9</code>.</p>
-<p>To avoid the most dangerous areas, you need to determine <strong>5</strong></code> points.</p>
+<p>To avoid the most dangerous areas, you need to determine <strong>the number of points where at least two lines overlap</strong>. In the above example, this is anywhere in the diagram with a <code>2</code> or larger - a total of <code><strong>5</strong></code> points.</p>
 <p>Consider only horizontal and vertical lines. <strong>At how many points do at least two lines overlap?</strong></p>
 </article>
 
@@ -56,6 +55,6 @@
 1.......1.
 222111....
 </code></pre>
-<p>You still need to determine <strong>12</strong></code> points.</p>
+<p>You still need to determine <strong>the number of points where at least two lines overlap</strong>. In the above example, this is still anywhere in the diagram with a <code>2</code> or larger - now a total of <code><strong>12</strong></code> points.</p>
 <p>Consider all of the lines. <strong>At how many points do at least two lines overlap?</strong></p>
 </article>

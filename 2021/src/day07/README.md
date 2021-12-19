@@ -1,5 +1,4 @@
 # 🎄 Advent of Code 2021 - day 7 🎄
-
 [Original problem](https://adventofcode.com/2021/day/7)
 
 <article class="day-desc"><h2>--- Day 7: The Treachery of Whales ---</h2><p>A giant <a href="https://en.wikipedia.org/wiki/Sperm_whale" target="_blank">whale</a> has decided your submarine is its next meal, and it's much faster than you are. There's nowhere to run!</p>

@@ -1,7 +1,7 @@
 # 🎄 Advent of Code 2021 - day 18 🎄
 [Original problem](https://adventofcode.com/2021/day/18)
 
-<article class="day-desc"><h2>--- Day 18: Snailfish ---</h2><p>You descend into the ocean trench and encounter some <a href="https://en.wikipedia.org/wiki/Snailfish" target="_blank">snailfish</a>. They say they saw the sleigh keys! They'll even tell you which direction the keys went if you help one of the smaller snailfish with his <strong> homework</strong>.</p>
+<article class="day-desc"><h2>--- Day 18: Snailfish ---</h2><p>You descend into the ocean trench and encounter some <a href="https://en.wikipedia.org/wiki/Snailfish" target="_blank">snailfish</a>. They say they saw the sleigh keys! They'll even tell you which direction the keys went if you help one of the smaller snailfish with his <em><span title="Or 'maths', if you have more than one.">math</span> homework</em>.</p>
 <p>Snailfish numbers aren't like regular numbers. Instead, every snailfish number is a <strong>pair</strong> - an ordered list of two elements. Each element of the pair can be either a regular number or another pair.</p>
 <p>Pairs are written as <code>[x,y]</code>, where <code>x</code> and <code>y</code> are the elements within the pair. Here are some example snailfish numbers, one snailfish number per line:</p>
 <pre><code>[1,2]
@@ -16,21 +16,21 @@
 <p>There's only one problem: <strong>snailfish numbers must always be reduced</strong>, and the process of adding two snailfish numbers can result in snailfish numbers that need to be reduced.</p>
 <p>To <strong>reduce a snailfish number</strong>, you must repeatedly do the first action in this list that applies to the snailfish number:</p>
 <ul>
-<li>If any pair is <strong>explodes</strong>.</li>
-<li>If any regular number is <strong>splits</strong>.</li>
+<li>If any pair is <strong>nested inside four pairs</strong>, the leftmost such pair <strong>explodes</strong>.</li>
+<li>If any regular number is <strong>10 or greater</strong>, the leftmost such regular number <strong>splits</strong>.</li>
 </ul>
 <p>Once no action in the above list applies, the snailfish number is reduced.</p>
-<p>During reduction, at most one action applies, after which the process returns to the top of the list of actions. For example, if <strong>splits</strong> occur.</p>
+<p>During reduction, at most one action applies, after which the process returns to the top of the list of actions. For example, if <strong>split</strong> produces a pair that meets the <strong>explode</strong> criteria, that pair <strong>explodes</strong> before other <strong>splits</strong> occur.</p>
 <p>To <strong>explode</strong> a pair, the pair's left value is added to the first regular number to the left of the exploding pair (if any), and the pair's right value is added to the first regular number to the right of the exploding pair (if any). Exploding pairs will always consist of two regular numbers. Then, the entire exploding pair is replaced with the regular number <code>0</code>.</p>
 <p>Here are some examples of a single explode action:</p>
 <ul>
-<li><code>[[[[<strong>9</strong>],2],3],4]</code> (the <code>9</code> has no regular number to its left, so it is not added to any regular number).</li>
-<li><code>[7,[6,[5,[4,<strong>0</strong>]]]]</code> (the <code>2</code> has no regular number to its right, and so it is not added to any regular number).</li>
-<li><code>[[6,[5,[4,<strong>3</strong>]</code>.</li>
-<li><code>[[3,[2,[1,<strong>9</strong>,[5,[4,[3,2]]]]]</code> (the pair <code>[3,2]</code> is unaffected because the pair <code>[7,3]</code> is further to the left; <code>[3,2]</code> would explode on the next action).</li>
-<li><code>[[3,[2,[8,0]]],[9,[5,[4,<strong>0</strong>]]]]</code>.</li>
+<li><code>[[[[<strong>[9,8]</strong>,1],2],3],4]</code> becomes <code>[[[[<strong>0</strong>,<strong>9</strong>],2],3],4]</code> (the <code>9</code> has no regular number to its left, so it is not added to any regular number).</li>
+<li><code>[7,[6,[5,[4,<strong>[3,2]</strong>]]]]</code> becomes <code>[7,[6,[5,[<strong>7</strong>,<strong>0</strong>]]]]</code> (the <code>2</code> has no regular number to its right, and so it is not added to any regular number).</li>
+<li><code>[[6,[5,[4,<strong>[3,2]</strong>]]],1]</code> becomes <code>[[6,[5,[<strong>7</strong>,<strong>0</strong>]]],<strong>3</strong>]</code>.</li>
+<li><code>[[3,[2,[1,<strong>[7,3]</strong>]]],[6,[5,[4,[3,2]]]]]</code> becomes <code>[[3,[2,[<strong>8</strong>,<strong>0</strong>]]],[<strong>9</strong>,[5,[4,[3,2]]]]]</code> (the pair <code>[3,2]</code> is unaffected because the pair <code>[7,3]</code> is further to the left; <code>[3,2]</code> would explode on the next action).</li>
+<li><code>[[3,[2,[8,0]]],[9,[5,[4,<strong>[3,2]</strong>]]]]</code> becomes <code>[[3,[2,[8,0]]],[9,[5,[<strong>7</strong>,<strong>0</strong>]]]]</code>.</li>
 </ul>
-<p>To <strong>up</strong>. For example, <code>10</code> becomes <code>[5,5]</code>, <code>11</code> becomes <code>[5,6]</code>, <code>12</code> becomes <code>[6,6]</code>, and so on.</p>
+<p>To <strong>split</strong> a regular number, replace it with a pair; the left element of the pair should be the regular number divided by two and rounded <strong>down</strong>, while the right element of the pair should be the regular number divided by two and rounded <strong>up</strong>. For example, <code>10</code> becomes <code>[5,5]</code>, <code>11</code> becomes <code>[5,6]</code>, <code>12</code> becomes <code>[6,6]</code>, and so on.</p>
 <p>Here is the process of finding the reduced result of <code>[[[[4,3],4],4],[7,[[8,4],9]]]</code> + <code>[1,1]</code>:</p>
 <pre><code>after addition: [[[[<strong>[4,3]</strong>,4],4],[7,[[8,4],9]]],[1,1]]
 after explode:  [[[[0,7],4],[7,[<strong>[8,4]</strong>,9]]],[1,1]]
@@ -112,7 +112,7 @@ after explode:  [[[[0,7],4],[[7,8],[6,0]]],[8,1]]
 = [[[[8,7],[7,7]],[[8,6],[7,7]]],[[[0,7],[6,6]],[8,7]]]
 </code></pre>
 <p>To check whether it's the right answer, the snailfish teacher only checks the <strong>magnitude</strong> of the final sum. The magnitude of a pair is 3 times the magnitude of its left element plus 2 times the magnitude of its right element. The magnitude of a regular number is just that number.</p>
-<p>For example, the magnitude of <code>[9,1]</code> is <code>3*9 + 2*1 = <strong>129</strong></code>.</p>
+<p>For example, the magnitude of <code>[9,1]</code> is <code>3*9 + 2*1 = <strong>29</strong></code>; the magnitude of <code>[1,9]</code> is <code>3*1 + 2*9 = <strong>21</strong></code>. Magnitude calculations are recursive: the magnitude of <code>[[9,1],[1,9]]</code> is <code>3*29 + 2*21 = <strong>129</strong></code>.</p>
 <p>Here are a few more magnitude examples:</p>
 <ul>
 <li><code>[[1,2],[[3,4],5]]</code> becomes <code><strong>143</strong></code>.</li>

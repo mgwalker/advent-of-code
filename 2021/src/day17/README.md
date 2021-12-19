@@ -91,7 +91,7 @@ S....................#.........
 <p>The probe appears to pass through the target area, but is never within it after any step. Instead, it continues down and to the right - only the first few steps are shown.</p>
 <p>If you're going to fire a highly scientific probe out of a super cool probe launcher, you might as well do it with <strong>style</strong>. How high can you make the probe go while still reaching the target area?</p>
 <p>In the above example, using an initial velocity of <code>6,9</code> is the best you can do, causing the probe to reach a maximum <code>y</code> position of <code><strong>45</strong></code>. (Any higher initial <code>y</code> velocity causes the probe to overshoot the target area entirely.)</p>
-<p>Find the initial velocity that causes the probe to reach the highest <code>y</code> position and still eventually be within the target area after any step. <strong> position it reaches on this trajectory?</strong></p>
+<p>Find the initial velocity that causes the probe to reach the highest <code>y</code> position and still eventually be within the target area after any step. <em>What is the highest <code>y</code> position it reaches on this trajectory?</em></p>
 </article>
 
 <article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>Maybe a fancy trick shot isn't the best idea; after all, you only have one probe, so you had better not miss.</p>

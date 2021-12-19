@@ -22,7 +22,7 @@ E = 1110
 F = 1111
 </code></pre>
 <p>The BITS transmission contains a single <strong>packet</strong> at its outermost layer which itself contains many other packets. The hexadecimal representation of this packet might encode a few extra <code>0</code> bits at the end; these are not part of the transmission and should be ignored.</p>
-<p>Every packet begins with a standard header: the first three bits encode the packet <strong>type ID</strong>. These two values are numbers; all numbers encoded in any packet are represented as binary with the most significant bit first. For example, a version encoded as the binary sequence <code>100</code> represents the number <code>4</code>.</p>
+<p>Every packet begins with a standard header: the first three bits encode the packet <strong>version</strong>, and the next three bits encode the packet <strong>type ID</strong>. These two values are numbers; all numbers encoded in any packet are represented as binary with the most significant bit first. For example, a version encoded as the binary sequence <code>100</code> represents the number <code>4</code>.</p>
 <p>Packets with type ID <code>4</code> represent a <strong>literal value</strong>. Literal value packets encode a single binary number. To do this, the binary number is padded with leading zeroes until its length is a multiple of four bits, and then it is broken into groups of four bits. Each group is prefixed by a <code>1</code> bit except the last group, which is prefixed by a <code>0</code> bit. These groups of five bits immediately follow the packet header. For example, the hexadecimal string <code>D2FE28</code> becomes:</p>
 <pre><code>110100101111111000101000
 VVVTTTAAAAABBBBBCCCCC
@@ -40,8 +40,8 @@ VVVTTTAAAAABBBBBCCCCC
 <p>Every other type of packet (any packet with a type ID other than <code>4</code>) represent an <strong>operator</strong> that performs some calculation on one or more sub-packets contained within. Right now, the specific operations aren't important; focus on parsing the hierarchy of sub-packets.</p>
 <p>An operator packet contains one or more packets. To indicate which subsequent binary data represents its sub-packets, an operator packet can use one of two modes indicated by the bit immediately after the packet header; this is called the <strong>length type ID</strong>:</p>
 <ul>
-<li>If the length type ID is <code>0</code>, then the next <strong>total length in bits</strong> of the sub-packets contained by this packet.</li>
-<li>If the length type ID is <code>1</code>, then the next <strong>number of sub-packets immediately contained</strong> by this packet.</li>
+<li>If the length type ID is <code>0</code>, then the next <strong>15</strong> bits are a number that represents the <strong>total length in bits</strong> of the sub-packets contained by this packet.</li>
+<li>If the length type ID is <code>1</code>, then the next <strong>11</strong> bits are a number that represents the <strong>number of sub-packets immediately contained</strong> by this packet.</li>
 </ul>
 <p>Finally, after the length type ID bit and the 15-bit or 11-bit field, the sub-packets appear.</p>
 <p>For example, here is an operator packet (hexadecimal string <code>38006F45291200</code>) with length type ID <code>0</code> that contains two sub-packets:</p>
@@ -89,9 +89,9 @@ VVVTTTILLLLLLLLLLLAAAAAAAAAAABBBBBBBBBBBCCCCCCCCCCC
 <li>Packets with type ID <code>1</code> are <strong>product</strong> packets - their value is the result of multiplying together the values of their sub-packets. If they only have a single sub-packet, their value is the value of the sub-packet.</li>
 <li>Packets with type ID <code>2</code> are <strong>minimum</strong> packets - their value is the minimum of the values of their sub-packets.</li>
 <li>Packets with type ID <code>3</code> are <strong>maximum</strong> packets - their value is the maximum of the values of their sub-packets.</li>
-<li>Packets with type ID <code>5</code> are <strong>0</strong>. These packets always have exactly two sub-packets.</li>
-<li>Packets with type ID <code>6</code> are <strong>0</strong>. These packets always have exactly two sub-packets.</li>
-<li>Packets with type ID <code>7</code> are <strong>0</strong>. These packets always have exactly two sub-packets.</li>
+<li>Packets with type ID <code>5</code> are <strong>greater than</strong> packets - their value is <strong>1</strong> if the value of the first sub-packet is greater than the value of the second sub-packet; otherwise, their value is <strong>0</strong>. These packets always have exactly two sub-packets.</li>
+<li>Packets with type ID <code>6</code> are <strong>less than</strong> packets - their value is <strong>1</strong> if the value of the first sub-packet is less than the value of the second sub-packet; otherwise, their value is <strong>0</strong>. These packets always have exactly two sub-packets.</li>
+<li>Packets with type ID <code>7</code> are <strong>equal to</strong> packets - their value is <strong>1</strong> if the value of the first sub-packet is equal to the value of the second sub-packet; otherwise, their value is <strong>0</strong>. These packets always have exactly two sub-packets.</li>
 </ul>
 <p>Using these rules, you can now work out the value of the outermost packet in your BITS transmission.</p>
 <p>For example:</p>

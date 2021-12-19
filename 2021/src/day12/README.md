@@ -1,8 +1,7 @@
 # 🎄 Advent of Code 2021 - day 12 🎄
-
 [Original problem](https://adventofcode.com/2021/day/12)
 
-<article class="day-desc"><h2>--- Day 12: Passage Pathing ---</h2><p>With your <span title="Sublime.">submarine's subterranean subsystems subsisting suboptimally</span>, the only way you're getting out of this cave anytime soon is by finding a path yourself. Not just <strong>all</strong> of them.</p>
+<article class="day-desc"><h2>--- Day 12: Passage Pathing ---</h2><p>With your <span title="Sublime.">submarine's subterranean subsystems subsisting suboptimally</span>, the only way you're getting out of this cave anytime soon is by finding a path yourself. Not just <strong>a</strong> path - the only way to know if you've found the <strong>best</strong> path is to find <strong>all</strong> of them.</p>
 <p>Fortunately, the sensors are still mostly working, and so you build a rough map of the remaining caves (your puzzle input). For example:</p>
 <pre><code>start-A
 start-b
@@ -20,7 +19,7 @@ c--A-----b--d
     \   /
      end
 </code></pre>
-<p>Your goal is to find the number of distinct <strong>visit big caves any number of times</strong>.</p>
+<p>Your goal is to find the number of distinct <strong>paths</strong> that start at <code>start</code>, end at <code>end</code>, and don't visit small caves more than once. There are two types of caves: <strong>big</strong> caves (written in uppercase, like <code>A</code>) and <strong>small</strong> caves (written in lowercase, like <code>b</code>). It would be a waste of time to visit any small cave more than once, but big caves are large enough that it might be worth visiting them multiple times. So, all paths you find should <strong>visit small caves at most once</strong>, and can <strong>visit big caves any number of times</strong>.</p>
 <p>Given these rules, there are <code><strong>10</strong></code> paths through this example cave system:</p>
 <pre><code>start,A,b,A,c,A,end
 start,A,b,A,end
@@ -91,7 +90,7 @@ start-RW
 <p><strong>How many paths through this cave system are there that visit small caves at most once?</strong></p>
 </article>
 
-<article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>After reviewing the available paths, you realize you might have time to visit a single small cave <strong>exactly once each</strong>: once you leave the <code>start</code> cave, you may not return to it, and once you reach the <code>end</code> cave, the path must end immediately.</p>
+<article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>After reviewing the available paths, you realize you might have time to visit a single small cave <strong>twice</strong>. Specifically, big caves can be visited any number of times, a single small cave can be visited at most twice, and the remaining small caves can be visited at most once. However, the caves named <code>start</code> and <code>end</code> can only be visited <strong>exactly once each</strong>: once you leave the <code>start</code> cave, you may not return to it, and once you reach the <code>end</code> cave, the path must end immediately.</p>
 <p>Now, the <code>36</code> possible paths through the first example above are:</p>
 <pre><code>start,A,b,A,b,A,c,A,end
 start,A,b,A,b,A,end

@@ -1,11 +1,10 @@
 # 🎄 Advent of Code 2021 - day 10 🎄
-
 [Original problem](https://adventofcode.com/2021/day/10)
 
 <article class="day-desc"><h2>--- Day 10: Syntax Scoring ---</h2><p>You ask the submarine to determine the best route out of the deep-sea cave, but it only replies:</p>
 <pre><code>Syntax error in navigation subsystem on line: <span title="Some days, that's just how it is.">all of them</span></code></pre>
 <p><strong>All of them?!</strong> The damage is worse than you thought. You bring up a copy of the navigation subsystem (your puzzle input).</p>
-<p>The navigation subsystem syntax is made of several lines containing <strong>close</strong> with one of four legal pairs of matching characters:</p>
+<p>The navigation subsystem syntax is made of several lines containing <strong>chunks</strong>. There are one or more chunks on each line, and chunks contain zero or more other chunks. Adjacent chunks are not separated by any delimiter; if one chunk stops, the next chunk (if any) can immediately start. Every chunk must <strong>open</strong> and <strong>close</strong> with one of four legal pairs of matching characters:</p>
 <ul>
 <li>If a chunk opens with <code>(</code>, it must close with <code>)</code>.</li>
 <li>If a chunk opens with <code>[</code>, it must close with <code>]</code>.</li>
@@ -13,7 +12,7 @@
 <li>If a chunk opens with <code>&lt;</code>, it must close with <code>&gt;</code>.</li>
 </ul>
 <p>So, <code>()</code> is a legal chunk that contains no other chunks, as is <code>[]</code>. More complex but valid chunks include <code>([])</code>, <code>{()()()}</code>, <code>&lt;([{}])&gt;</code>, <code>[&lt;&gt;({}){}[([])&lt;&gt;]]</code>, and even <code>(((((((((())))))))))</code>.</p>
-<p>Some lines are <strong>corrupted</strong>. Find and discard the corrupted lines first.</p>
+<p>Some lines are <strong>incomplete</strong>, but others are <strong>corrupted</strong>. Find and discard the corrupted lines first.</p>
 <p>A corrupted line is one where a chunk <strong>closes with the wrong character</strong> - that is, where the characters it opens and closes with do not form one of the four legal pairs listed above.</p>
 <p>Examples of corrupted chunks include <code>(]</code>, <code>{()()()&gt;</code>, <code>(((()))}</code>, and <code>&lt;([]){()}[{}])</code>. Such a chunk can appear anywhere within a line, and its presence causes the whole line to be considered corrupted.</p>
 <p>For example, consider the following navigation subsystem:</p>
@@ -44,7 +43,7 @@
 <li><code>}</code>: <code>1197</code> points.</li>
 <li><code>&gt;</code>: <code>25137</code> points.</li>
 </ul>
-<p>In the above example, an illegal <code>)</code> was found twice (<code>2*3 = <strong>26397</strong></code> points!</p>
+<p>In the above example, an illegal <code>)</code> was found twice (<code>2*3 = <strong>6</strong></code> points), an illegal <code>]</code> was found once (<code><strong>57</strong></code> points), an illegal <code>}</code> was found once (<code><strong>1197</strong></code> points), and an illegal <code>&gt;</code> was found once (<code><strong>25137</strong></code> points). So, the total syntax error score for this file is <code>6+57+1197+25137 = <strong>26397</strong></code> points!</p>
 <p>Find the first illegal character in each corrupted line of the navigation subsystem. <strong>What is the total syntax error score for those errors?</strong></p>
 </article>
 
@@ -82,6 +81,6 @@
 <li><code>]]}}]}]}&gt;</code> - <code>995444</code> total points.</li>
 <li><code>])}&gt;</code> - <code>294</code> total points.</li>
 </ul>
-<p>Autocomplete tools are an odd bunch: the winner is found by <strong>288957</strong></code> because there are the same number of scores smaller and larger than it.</p>
+<p>Autocomplete tools are an odd bunch: the winner is found by <strong>sorting</strong> all of the scores and then taking the <strong>middle</strong> score. (There will always be an odd number of scores to consider.) In this example, the middle score is <code><strong>288957</strong></code> because there are the same number of scores smaller and larger than it.</p>
 <p>Find the completion string for each incomplete line, score the completion strings, and sort the scores. <strong>What is the middle score?</strong></p>
 </article>

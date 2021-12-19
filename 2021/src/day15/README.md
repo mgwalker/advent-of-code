@@ -1,5 +1,4 @@
 # 🎄 Advent of Code 2021 - day 15 🎄
-
 [Original problem](https://adventofcode.com/2021/day/15)
 
 <article class="day-desc"><h2>--- Day 15: Chiton ---</h2><p>You've almost reached the exit of the cave, but the walls are getting closer together. Your submarine can barely still fit, though; the main problem is that the walls of the cave are covered in <a href="https://en.wikipedia.org/wiki/Chiton" target="_blank">chitons</a>, and it would be best not to bump any of them.</p>
@@ -15,7 +14,7 @@
 1293138521
 2311944581
 </code></pre>
-<p>You start in the top left position, your destination is the bottom right position, and you <span title="Can't go diagonal until we can repair the caterpillar unit. Could be the liquid helium or the superconductors.">cannot move diagonally</span>. The number at each position is its <strong>enter</strong> (that is, don't count the risk level of your starting position unless you enter it; leaving it adds no risk to your total).</p>
+<p>You start in the top left position, your destination is the bottom right position, and you <span title="Can't go diagonal until we can repair the caterpillar unit. Could be the liquid helium or the superconductors.">cannot move diagonally</span>. The number at each position is its <strong>risk level</strong>; to determine the total risk of an entire path, add up the risk levels of each position you <strong>enter</strong> (that is, don't count the risk level of your starting position unless you enter it; leaving it adds no risk to your total).</p>
 <p>Your goal is to find a path with the <strong>lowest total risk</strong>. In this example, a path with the lowest total risk is highlighted here:</p>
 <pre><code><strong>1</strong>163751742
 <strong>1</strong>381373672
@@ -33,7 +32,7 @@
 </article>
 
 <article class="day-desc"><h2 id="part2">--- Part Two ---</h2><p>Now that you know how to find low-risk paths in the cave, you can try to find your way out.</p>
-<p>The entire cave is actually <strong>are 1 higher</strong> than the tile immediately up or left of it. However, risk levels above <code>9</code> wrap back around to <code>1</code>. So, if your original map had some position with a risk level of <code>8</code>, then that same position on each of the 25 total tiles would be as follows:</p>
+<p>The entire cave is actually <strong>five times larger in both dimensions</strong> than you thought; the area you originally scanned is just one tile in a 5x5 tile area that forms the full map. Your original map tile repeats to the right and downward; each time the tile repeats to the right or downward, all of its risk levels <strong>are 1 higher</strong> than the tile immediately up or left of it. However, risk levels above <code>9</code> wrap back around to <code>1</code>. So, if your original map had some position with a risk level of <code>8</code>, then that same position on each of the 25 total tiles would be as follows:</p>
 <pre><code>8 9 1 2 3
 9 1 2 3 4
 1 2 3 4 5

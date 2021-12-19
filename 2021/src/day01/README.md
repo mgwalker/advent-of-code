@@ -1,5 +1,4 @@
 # 🎄 Advent of Code 2021 - day 1 🎄
-
 [Original problem](https://adventofcode.com/2021/day/1)
 
 <article class="day-desc"><h2>--- Day 1: Sonar Sweep ---</h2><p>You're minding your own business on a ship at sea when the overboard alarm goes off! You rush to see if you can help. Apparently, one of the Elves tripped and accidentally sent the sleigh keys flying into the ocean!</p>
@@ -33,7 +32,7 @@
 260 (decreased)
 263 (<strong>increased</strong>)
 </code></pre>
-<p>In this example, there are <strong></strong> measurements that are larger than the previous measurement.</p>
+<p>In this example, there are <em><code>7</code></em> measurements that are larger than the previous measurement.</p>
 <p><strong>How many measurements are larger than the previous measurement?</strong></p>
 </article>
 
@@ -62,6 +61,6 @@ F: 716 (<strong>increased</strong>)
 G: 769 (<strong>increased</strong>)
 H: 792 (<strong>increased</strong>)
 </code></pre>
-<p>In this example, there are <strong></strong> sums that are larger than the previous sum.</p>
+<p>In this example, there are <em><code>5</code></em> sums that are larger than the previous sum.</p>
 <p>Consider sums of a three-measurement sliding window. <strong>How many sums are larger than the previous sum?</strong></p>
 </article>

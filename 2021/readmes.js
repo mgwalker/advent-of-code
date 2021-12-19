@@ -1,7 +1,6 @@
 import { config } from "dotenv";
 import fs from "fs/promises";
 import fetch from "node-fetch";
-import setTimeout from "timers/promises";
 
 config();
 const AOC_KEY = process.env.AOC_SESSION_KEY;
@@ -26,7 +25,9 @@ await Promise.all(
 
       const parts = txt
         .match(/<article.*>[\s\S]+?<\/article>/gim)
-        .map((p) => p.replace(/<em.*>([^<]*)<\/em>/gm, "<strong>$1</strong>"))
+        .map((p) =>
+          p.replace(/<em[^>]*>([^<]*?)<\/em>/gm, "<strong>$1</strong>"),
+        )
         .map((p) => p.replace(/\{\{/g, "&#123;&#123;"));
 
       const readme = `# 🎄 Advent of Code 2021 - day ${day} 🎄
