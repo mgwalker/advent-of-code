@@ -36,15 +36,20 @@ const enhance = (algorithm, data, iteration) => {
 
   const img = [];
 
-  // Figure out the blank pixel. If it's an odd-numbered iteration (such as the
-  // first one), then the blank pixel is the opposite of whatever the first bit
-  // in the algorithm is. Otherwise, it's exactly the first bit of the algo.
   const blank = (() => {
-    if (iteration % 2 === 0) {
-      return algorithm[0];
-    } else {
-      return algorithm[0] === "#" ? "." : "#";
+    // If the first rule of the algorithm is #, then the unseen infinite pixels
+    // will all be lit after the first iteration. If the first rule is #, then
+    // the last rule MUST BE . in order to not create an actually-infninite
+    // image. Anyway,this is how we decide the state of all the infinite pixels
+    // for each step.
+    if (algorithm[0] === "#") {
+      if (iteration % 2 === 0) {
+        return "#";
+      } else {
+        return ".";
+      }
     }
+    return ".";
   })();
 
   // Expand the bounds of our output image to account for previously-hidden
