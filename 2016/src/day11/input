@@ -2,34 +2,3 @@ The first floor contains a promethium generator and a promethium-compatible micr
 The second floor contains a cobalt generator, a curium generator, a ruthenium generator, and a plutonium generator.
 The third floor contains a cobalt-compatible microchip, a curium-compatible microchip, a ruthenium-compatible microchip, and a plutonium-compatible microchip.
 The fourth floor contains nothing relevant.
-
-_
-CM MM RM LM
-CG MG RG LG
-PG PM
-=====
-_
-CG CM MM RM LM
-MG RG LG
-PG PM
-=====
-_
-CG CM RM LM
-MG MM RG LG
-PG PM
-=====
-_
-CG CM RG RM LG LM
-MG MM
-PG PM
-=====
-RG RM
-CG CM LG LM
-MG MM
-PG PM
-=====
-RM
-CG CM RG LG LM
-MG MM
-PG PM
-=====
