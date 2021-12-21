@@ -110,14 +110,17 @@ export const part2 = (raw) => {
 
     // Spawn off new universes for the three possible outcomes of this roll.
     // Grab the scores that we get back from each universe.
-    const [s1a, s2a] = playTheGame(doABarrelRoll(game, 1));
-    const [s1b, s2b] = playTheGame(doABarrelRoll(game, 2));
-    const [s1c, s2c] = playTheGame(doABarrelRoll(game, 3));
+    const descendantScore = [1, 2, 3]
+      .map((roll) => playTheGame(doABarrelRoll(game, roll)))
+      .reduce(
+        ([sum1, sum2], [score1, score2]) => [sum1 + score1, sum2 + score2],
+        [0, 0],
+      );
 
     // The preceding three universes represent the three universes that are
     // spawned from this one. The score of THIS universe, therefore, is the
     // sum of the scores of those universes.
-    games.set(gameId, [s1a + s1b + s1c, s2a + s2b + s2c]);
+    games.set(gameId, descendantScore);
 
     // Return our universe's score.
     return games.get(gameId);
