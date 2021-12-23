@@ -393,14 +393,14 @@
         "solved": true,
         "result": "15109",
         "attempts": [],
-        "time": 1673.89,
+        "time": 847.9,
         "readme": true
       },
       "part2": {
         "solved": true,
         "result": "53751",
         "attempts": [],
-        "time": 1175.82,
+        "time": 740.28,
         "readme": true
       }
     },

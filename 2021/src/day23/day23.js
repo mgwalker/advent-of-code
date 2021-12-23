@@ -14,9 +14,11 @@ const input = (raw) => {
         .trim()
         .replace(/#/g, "")
         .split("")
+        // Map the letters to 0-index numbers for easier math later on
         .map((l) => letters[l]),
     );
 
+  // Null is a place you can't go. False is an empty spot.
   const hallway = [...Array(11)].map((_, i) =>
     i > 0 && i < 10 && i % 2 === 0 ? null : false,
   );
@@ -48,9 +50,11 @@ const play = (state, init = false) => {
     return;
   }
 
-  const { cost, hallway, rooms } = JSON.parse(JSON.stringify(state));
+  const { cost, hallway, rooms } = state;
   const stateKey = getStateKey({ hallway, rooms });
 
+  // We've won if every room is filled with toads whose value corresponds to
+  // the index of the room.
   const won = rooms.every((room, i) => room.every((toad) => toad === i));
   if (won) {
     if (cost < minimumCost) {
@@ -66,149 +70,121 @@ const play = (state, init = false) => {
 
   // Now figure out all the possible moves from this point.
 
-  // If the hallway is empty, then the possible moves are each of the topmost
-  // toads moving to each spot in the hallway.
-  if (hallway.every((v) => v === false || v === null)) {
-    for (let hallSpot = 0; hallSpot < hallway.length; hallSpot += 1) {
-      if (hallway[hallSpot] === null) {
-        // This is not a spot you can move into, so skip it.
-        continue;
-      }
-      for (let room = 0; room < rooms.length; room += 1) {
-        const newRooms = JSON.parse(JSON.stringify(rooms));
-        const newHall = [...hallway];
-
-        newHall[hallSpot] = newRooms[room][0];
-        newRooms[room][0] = false;
-
-        // This is the hallway column that the toad's room opens onto. Also
-        // add one to the cost to account for the toad moving out of the room
-        // and into the hallway.
-        const toadSpot = room * 2 + 2;
-        const newCost =
-          (1 + Math.abs(toadSpot - hallSpot)) * 10 ** rooms[room][0];
-
-        play({ cost: cost + newCost, hallway: newHall, rooms: newRooms });
-      }
-    }
-  } else {
-    // Next see if any toad can go home.
-    for (let hallSpot = 0; hallSpot < hallway.length; hallSpot += 1) {
-      if (hallway[hallSpot] === null || hallway[hallSpot] === false) {
-        // This is not a stoppable spot, or nobody's in it.
-        continue;
-      }
-
-      const toad = hallway[hallSpot];
-
-      // If its home room is empty or only occupied by the same kind of toad,
-      // we're good to go.
-      if (rooms[toad].every((t) => t === toad || t === false)) {
-        // This is the hallway column the toad needs to get to in order to
-        // reach its room.
-        const homeSpot = toad * 2 + 2;
-
-        let allClear = false;
-        if (homeSpot > hallSpot) {
-          const ahead = hallway.slice(hallSpot + 1, homeSpot);
-          if (ahead.every((spot) => spot === false || spot === null)) {
-            // The way forward is clear. This toad can go home.
-            allClear = true;
-          }
-        } else {
-          const behind = hallway.slice(homeSpot, hallSpot);
-          if (behind.every((spot) => spot === false || spot === null)) {
-            // The way back is clear. This toad can go home.
-            allClear = true;
-          }
-        }
-
-        if (allClear) {
-          const roomIndex =
-            rooms[toad].filter((spot) => spot === false).length - 1;
-
-          const newHallway = [...hallway];
-          const newRooms = JSON.parse(JSON.stringify(rooms));
-
-          newHallway[hallSpot] = false;
-          newRooms[toad][roomIndex] = toad;
-
-          const newCost =
-            (Math.abs(hallSpot - homeSpot) +
-              rooms[toad].filter((t) => t === false).length) *
-            10 ** toad;
-
-          play({
-            cost: cost + newCost,
-            hallway: newHallway,
-            rooms: newRooms,
-          });
-        }
-      }
+  // See if any toads can go home.
+  for (let hallSpot = 0; hallSpot < hallway.length; hallSpot += 1) {
+    if (hallway[hallSpot] === null || hallway[hallSpot] === false) {
+      // This is not a stoppable spot, or nobody's in it.
+      continue;
     }
 
-    // Otherwise, all the toads at the tops of their rooms can try all of the
-    // available hall spots that they can get to.
-    for (let room = 0; room < rooms.length; room += 1) {
-      // If all of the creatures in this room live here, from bottom up, we
-      // can skip this one, too.
-      if (rooms[room].every((t) => t === room || t === false)) {
-        continue;
+    const toad = hallway[hallSpot];
+
+    // If its home room is empty or only occupied by the same kind of toad,
+    // we're good to go.
+    if (rooms[toad].every((t) => t === toad || t === false)) {
+      // This is the hallway column the toad needs to get to in order to
+      // reach its room.
+      const homeSpot = toad * 2 + 2;
+
+      let allClear = false;
+      if (homeSpot > hallSpot) {
+        const ahead = hallway.slice(hallSpot + 1, homeSpot);
+        if (ahead.every((spot) => spot === false || spot === null)) {
+          // The way forward is clear. This toad can go home.
+          allClear = true;
+        }
+      } else {
+        const behind = hallway.slice(homeSpot, hallSpot);
+        if (behind.every((spot) => spot === false || spot === null)) {
+          // The way back is clear. This toad can go home.
+          allClear = true;
+        }
       }
 
-      const depth = rooms[room].filter((t) => t === false).length;
-      const toadSpot = room * 2 + 2;
+      if (allClear) {
+        // Where in the room the toad will end up
+        const roomIndex =
+          rooms[toad].filter((spot) => spot === false).length - 1;
 
-      if (depth === rooms[0].length) {
-        // This room is empty, so no toads can move out of it.
-        continue;
-      }
-
-      const tryHallspot = (hallSpot) => {
         const newHallway = [...hallway];
         const newRooms = JSON.parse(JSON.stringify(rooms));
 
-        newHallway[hallSpot] = rooms[room][depth];
-        newRooms[room][depth] = false;
+        newHallway[hallSpot] = false;
+        newRooms[toad][roomIndex] = toad;
 
         const newCost =
-          (depth + 1 + Math.abs(toadSpot - hallSpot)) *
-          10 ** rooms[room][depth];
+          (Math.abs(hallSpot - homeSpot) +
+            rooms[toad].filter((t) => t === false).length) *
+          10 ** toad;
 
-        play({ cost: cost + newCost, hallway: newHallway, rooms: newRooms });
-      };
+        play({
+          cost: cost + newCost,
+          hallway: newHallway,
+          rooms: newRooms,
+        });
+      }
+    }
+  }
 
-      for (let hallSpot = toadSpot - 1; hallSpot >= 0; hallSpot -= 1) {
-        if (hallway[hallSpot] === null) {
-          // Unoccupiable
-          continue;
-        }
-        if (hallway[hallSpot] !== false) {
-          // Occupied. The toad can't go here, and it can't go beyond this
-          // spot, either.
-          break;
-        }
+  // Otherwise, all the toads at the tops of their rooms can try all of the
+  // available hall spots that they can get to.
+  for (let room = 0; room < rooms.length; room += 1) {
+    // If all of the creatures in this room live here, we can skip this room
+    if (rooms[room].every((t) => t === room || t === false)) {
+      continue;
+    }
 
-        tryHallspot(hallSpot);
+    const depth = rooms[room].filter((t) => t === false).length;
+    const toadSpot = room * 2 + 2;
+
+    if (depth === rooms[0].length) {
+      // This room is empty, so no toads can move out of it.
+      continue;
+    }
+
+    const tryHallSpot = (hallSpot) => {
+      const newHallway = [...hallway];
+      const newRooms = JSON.parse(JSON.stringify(rooms));
+
+      newHallway[hallSpot] = rooms[room][depth];
+      newRooms[room][depth] = false;
+
+      const newCost =
+        (depth + 1 + Math.abs(toadSpot - hallSpot)) * 10 ** rooms[room][depth];
+
+      play({ cost: cost + newCost, hallway: newHallway, rooms: newRooms });
+    };
+
+    for (let hallSpot = toadSpot - 1; hallSpot >= 0; hallSpot -= 1) {
+      if (hallway[hallSpot] === null) {
+        // Unoccupiable
+        continue;
+      }
+      if (hallway[hallSpot] !== false) {
+        // Occupied. The toad can't go here, and it can't go beyond this
+        // spot, either.
+        break;
       }
 
-      for (
-        let hallSpot = toadSpot + 1;
-        hallSpot < hallway.length;
-        hallSpot += 1
-      ) {
-        if (hallway[hallSpot] === null) {
-          // Unoccupiable
-          continue;
-        }
-        if (hallway[hallSpot] !== false) {
-          // Occupied. The toad can't go here, and it can't go beyond this
-          // spot, either.
-          break;
-        }
+      tryHallSpot(hallSpot);
+    }
 
-        tryHallspot(hallSpot);
+    for (
+      let hallSpot = toadSpot + 1;
+      hallSpot < hallway.length;
+      hallSpot += 1
+    ) {
+      if (hallway[hallSpot] === null) {
+        // Unoccupiable
+        continue;
       }
+      if (hallway[hallSpot] !== false) {
+        // Occupied. The toad can't go here, and it can't go beyond this
+        // spot, either.
+        break;
+      }
+
+      tryHallSpot(hallSpot);
     }
   }
 };
