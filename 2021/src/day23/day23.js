@@ -38,7 +38,12 @@ let minimumCost = Infinity;
 
 const getStateKey = ({ hallway, rooms }) => hallway + "|" + rooms;
 
-const play = (state) => {
+const play = (state, init = false) => {
+  if (init) {
+    stateCosts.clear();
+    minimumCost = Infinity;
+  }
+
   if (state.cost > minimumCost) {
     return;
   }
@@ -209,18 +214,13 @@ const play = (state) => {
 };
 
 export const part1 = (raw) => {
-  stateCosts.clear();
-  minimumCost = Infinity;
   const state = { cost: 0, ...input(raw) };
-
-  play(state);
+  play(state, true);
 
   return minimumCost;
 };
 
 export const part2 = (raw) => {
-  stateCosts.clear();
-  minimumCost = Infinity;
   const state = { cost: 0, ...input(raw) };
 
   state.rooms[0] = [state.rooms[0][0], 3, 3, state.rooms[0][1]];
@@ -228,7 +228,7 @@ export const part2 = (raw) => {
   state.rooms[2] = [state.rooms[2][0], 1, 0, state.rooms[2][1]];
   state.rooms[3] = [state.rooms[3][0], 0, 2, state.rooms[3][1]];
 
-  play(state);
+  play(state, true);
 
   return minimumCost;
 };
