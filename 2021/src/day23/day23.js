@@ -209,13 +209,17 @@ const play = (state) => {
 };
 
 export const part1 = (raw) => {
+  stateCosts.clear();
   minimumCost = Infinity;
   const state = { cost: 0, ...input(raw) };
+
   play(state);
+
   return minimumCost;
 };
 
 export const part2 = (raw) => {
+  stateCosts.clear();
   minimumCost = Infinity;
   const state = { cost: 0, ...input(raw) };
 
