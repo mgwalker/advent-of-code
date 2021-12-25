@@ -420,16 +420,18 @@
     },
     {
       "part1": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "278",
         "attempts": [],
-        "time": null
+        "time": 95.66,
+        "readme": true
       },
       "part2": {
-        "solved": false,
+        "solved": true,
         "result": null,
         "attempts": [],
-        "time": null
+        "time": null,
+        "readme": true
       }
     }
   ]
