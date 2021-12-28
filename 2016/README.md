@@ -11,23 +11,23 @@
 
 <!--SOLUTIONS-->
 
-![Day](https://badgen.net/badge/01/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/02/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/03/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/04/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/05/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/06/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/07/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/08/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/09/%E2%98%86%E2%98%86/gray)
-![Day](https://badgen.net/badge/10/%E2%98%86%E2%98%86/gray)
-[![Day](https://badgen.net/badge/11/%E2%98%86%E2%98%85/yellow)](src/day11)
+[![Day](https://badgen.net/badge/01/%E2%98%86%E2%98%86/green)](src/day1)
+[![Day](https://badgen.net/badge/02/%E2%98%86%E2%98%86/green)](src/day2)
+[![Day](https://badgen.net/badge/03/%E2%98%86%E2%98%86/green)](src/day3)
+[![Day](https://badgen.net/badge/04/%E2%98%86%E2%98%86/green)](src/day4)
+[![Day](https://badgen.net/badge/05/%E2%98%86%E2%98%86/green)](src/day5)
+[![Day](https://badgen.net/badge/06/%E2%98%86%E2%98%86/green)](src/day6)
+[![Day](https://badgen.net/badge/07/%E2%98%86%E2%98%86/green)](src/day7)
+[![Day](https://badgen.net/badge/08/%E2%98%86%E2%98%86/green)](src/day8)
+[![Day](https://badgen.net/badge/09/%E2%98%86%E2%98%86/green)](src/day9)
+[![Day](https://badgen.net/badge/10/%E2%98%86%E2%98%86/green)](src/day10)
+[![Day](https://badgen.net/badge/11/%E2%98%86%E2%98%85/green)](src/day11)
 [![Day](https://badgen.net/badge/12/%E2%98%85%E2%98%85/green)](src/day12)
 [![Day](https://badgen.net/badge/13/%E2%98%85%E2%98%85/green)](src/day13)
 [![Day](https://badgen.net/badge/14/%E2%98%85%E2%98%85/green)](src/day14)
 [![Day](https://badgen.net/badge/15/%E2%98%85%E2%98%85/green)](src/day15)
 [![Day](https://badgen.net/badge/16/%E2%98%85%E2%98%85/green)](src/day16)
-![Day](https://badgen.net/badge/17/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/17/%E2%98%85%E2%98%85/green)](src/day17)
 ![Day](https://badgen.net/badge/18/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/19/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/20/%E2%98%86%E2%98%86/gray)
@@ -181,9 +181,9 @@ Both parts: 10177.194167ms
 
 ```
 Day 17
-Time part 1: -
-Time part 2: -
-Both parts: -
+Time part 1: 183.881ms
+Time part 2: 180.253ms
+Both parts: 364.13466600000004ms
 ```
 
 ```
@@ -243,8 +243,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 11/50
-Total time: 50185.601ms
+Total stars: 13/50
+Total time: 50549.736ms
 ```
 
 <!--/RESULTS-->
