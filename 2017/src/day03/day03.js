@@ -1,5 +1,3 @@
-import PF from "pathfinding";
-
 const input = (raw) => +raw;
 
 const getXY = (n) => {
@@ -46,15 +44,9 @@ const getXY = (n) => {
 
 export const part1 = (raw) => {
   const data = input(raw);
-  const [size, center, target] = getXY(data);
+  const [, center, target] = getXY(data);
 
-  const grid = [];
-  for (let y = 0; y < size; y += 1) {
-    grid.push("".padStart(size, "0").split("").map(Number));
-  }
-
-  const aStar = new PF.AStarFinder();
-  return aStar.findPath(...center, ...target, new PF.Grid(grid)).length - 1;
+  return Math.abs(target[0] - center[0]) + Math.abs(target[1] - center[1]);
 };
 
 export const part2 = (raw) => {
