@@ -149,10 +149,18 @@ export const part2 = (raw) => {
       }
       seen.set(key, state.moves);
 
-      if (state.target.x === 0 && state.target.y === 0) {
-        // The first time we match, we should be finished because we prioritized
-        // distance to finish and number of moves.
-        return state.moves;
+      if (state.empty.x === grid[0].length - 2 && state.empty.y === 0) {
+        // If our empty space is directly to the left of our target, then the
+        // optimal remaining moves are one to the right, then:
+        //
+        //   down, left, left, up, right
+        //
+        // That sequence of five moves will shift the target over one spot each
+        // time. We need to move length-1 spots in total, and the initial move
+        // to the right before the repeating sequence does one of those moves,
+        // so we need to repeat the cycle length-2 times. This addition is
+        // +1 for the move to the right, and +5*(lengh-2) for the cycles.
+        return state.moves + 1 + 5 * (grid[0].length - 2);
       }
 
       const moves = getNextMoves(state, grid);
