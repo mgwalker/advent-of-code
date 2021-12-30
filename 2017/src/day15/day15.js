@@ -1,3 +1,5 @@
+/* eslint-disable no-bitwise */
+
 const input = (raw) =>
   raw
     .trim()
