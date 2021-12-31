@@ -234,16 +234,22 @@
     },
     {
       "part1": {
-        "solved": false,
-        "result": null,
-        "attempts": [],
-        "time": null
+        "solved": true,
+        "result": "ehdpincaogkblmfj",
+        "attempts": [
+          "bdcieoalkgmhjp",
+          "ldmjpgnfeocabkhi"
+        ],
+        "time": 3.781375
       },
       "part2": {
-        "solved": false,
-        "result": null,
-        "attempts": [],
-        "time": null
+        "solved": true,
+        "result": "bpcekomfgjdlinha",
+        "attempts": [
+          "abcdefghijklmnop",
+          "cebpnajdhmfilkgo"
+        ],
+        "time": 93.12675
       }
     },
     {
