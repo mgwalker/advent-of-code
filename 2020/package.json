@@ -15,9 +15,12 @@
   "devDependencies": {
     "@types/node": "^16.11.6",
     "aocrunner": "^1.4.3",
+    "eslint": "^8.6.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.3",
     "prettier": "^2.4.1"
   },
-  "dependencies": {},
   "engines": {
     "node": ">=16.0.0"
   }
