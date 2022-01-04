@@ -91,10 +91,10 @@
     },
     {
       "part1": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "OUGLTKDJVBRMIXSACWYPEQNHZF",
         "attempts": [],
-        "time": null
+        "time": 0.448209
       },
       "part2": {
         "solved": false,
