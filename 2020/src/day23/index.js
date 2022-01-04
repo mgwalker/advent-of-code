@@ -46,53 +46,41 @@ const part1 = (raw) => {
 
 const part2 = (raw) => {
   const start = parseInput(raw);
-  const cups = [...Array(1_000_001)].map((_, i) => i + 0);
+  const cups = [...Array(1_000_001)].map((_, i) => i + 1);
 
-  for (let i = 0; i < start.length - 1; i += 1) {
-    cups[start[i]] = start[i + 1];
+  for (let i = 1; i < start.length; i += 1) {
+    cups[start[i - 1]] = start[i];
   }
-  cups[start[start.length - 1]] = 10;
-  cups[1_000_000] = start[0];
+  cups[start[start.length - 1]] = start.length + 1;
+  cups[cups.length - 1] = start[0];
 
   let current = start[0];
+  for (let i = 0; i < 10_000_000; i += 1) {
+    let next = current - 1;
 
-  for (let i = 0; i < 1; i += 1) {
-    const remove1 = cups[current];
-    const remove2 = cups[remove1];
-    const remove3 = cups[remove2];
+    const mv1 = cups[current];
+    const mv2 = cups[mv1];
+    const mv3 = cups[mv2];
 
-    console.log(remove1, remove2, remove3);
-
-    let dest = current - 1;
-    while (
-      dest < 1 ||
-      remove1 === dest ||
-      remove2 === dest ||
-      remove3 === dest
-    ) {
-      dest -= 1;
-      if (dest < 1) {
-        dest = 1_000_000;
+    while (next < 1 || mv1 === next || mv2 === next || mv3 === next) {
+      next -= 1;
+      if (next < 1) {
+        next = 1_000_000;
       }
     }
 
-    console.log(cups.slice(1, 12).join(" "));
-
-    cups[current] = cups[remove3];
-    cups[remove3] = cups[dest];
-    cups[dest] = remove1;
-
+    const head = cups[current];
+    const tail = cups[cups[cups[current]]];
+    cups[current] = cups[tail];
+    cups[tail] = cups[next];
+    cups[next] = head;
     current = cups[current];
-
-    console.log(cups.slice(1, 12).join(" "));
   }
 
   const cup1 = cups[1];
-  const cup2 = cups[cups[1]];
+  const cup2 = cups[cup1];
 
-  console.log(cup1, cup2);
-
-  return cup1 * cup2 === 149245887792;
+  return cup1 * cup2;
 };
 
 run({
