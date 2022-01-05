@@ -133,16 +133,16 @@
     },
     {
       "part1": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "#    #  #####   ######  #    #  #    #  #    #  #    #  #     \n#    #  #    #  #       #    #  #    #  #    #  #   #   #     \n #  #   #    #  #        #  #    #  #    #  #   #  #    #     \n #  #   #    #  #        #  #    #  #    #  #   # #     #     \n  ##    #####   #####     ##      ##      ##    ##      #     \n  ##    #       #         ##      ##      ##    ##      #     \n #  #   #       #        #  #    #  #    #  #   # #     #     \n #  #   #       #        #  #    #  #    #  #   #  #    #     \n#    #  #       #       #    #  #    #  #    #  #   #   #     \n#    #  #       #       #    #  #    #  #    #  #    #  ######",
         "attempts": [],
-        "time": null
+        "time": 82.107542
       },
       "part2": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "10521",
         "attempts": [],
-        "time": null
+        "time": 76.475042
       }
     },
     {
