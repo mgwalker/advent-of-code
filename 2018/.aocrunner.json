@@ -94,13 +94,13 @@
         "solved": true,
         "result": "OUGLTKDJVBRMIXSACWYPEQNHZF",
         "attempts": [],
-        "time": 0.448209
+        "time": 0.507334
       },
       "part2": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "929",
         "attempts": [],
-        "time": null
+        "time": 0.695375
       }
     },
     {
