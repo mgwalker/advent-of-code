@@ -25,6 +25,7 @@
     "node": ">=16.13.0"
   },
   "dependencies": {
+    "counting-set": "^1.0.1",
     "pathfinding": "^0.4.18"
   },
   "prettier": {}

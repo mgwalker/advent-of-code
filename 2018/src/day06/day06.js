@@ -1,4 +1,4 @@
-import CountingSet from "./CountingSet.js";
+import CountingSet from "counting-set";
 
 const input = (raw) =>
   raw
@@ -93,7 +93,6 @@ export const part2 = (raw) => {
       }
       if (distances < 10_000) {
         regionCount += 1;
-        console.log(regionCount);
       }
     }
   }

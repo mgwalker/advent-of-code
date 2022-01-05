@@ -1,4 +1,4 @@
-import CountingSet from "./CountingSet.js";
+import CountingSet from "counting-set";
 
 const input = (raw) =>
   raw
