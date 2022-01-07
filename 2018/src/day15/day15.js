@@ -99,8 +99,16 @@ export const part1 = (raw) => {
         .map(({ x, y }) => {
           const clone = constrainedRoom.clone();
           clone.setWalkableAt(x, y, true);
-          return pathfinder.findPath(unit.x, unit.y, x, y, clone);
+          return [
+            [x, y - 1],
+            [x - 1, y],
+            [x + 1, y],
+            [x, y + 1],
+          ].map(([ex, ey]) =>
+            pathfinder.findPath(unit.x, unit.y, ex, ey, clone.clone())
+          );
         })
+        .flat()
         .filter((p) => p.length > 0);
 
       if (paths.length > 0) {
@@ -108,8 +116,19 @@ export const part1 = (raw) => {
           ...paths.map((p) => (p.length > 0 ? p.length : Infinity))
         );
 
-        const shortPaths = paths.filter((p) => p.length === shortest);
-        const [newX, newY] = shortPaths.sort(xySort)[0][1];
+        const potentialNextSteps = paths
+          .filter((p) => p.length === shortest)
+          .map((p) => p[1]);
+        const [newX, newY] = potentialNextSteps.sort(xySort)[0];
+
+        if (potentialNextSteps.length > 4) {
+          console.log(paths);
+          console.log(potentialNextSteps);
+          console.log(newX, newY);
+          console.log("============");
+
+          // throw new Error();
+        }
 
         board[unit.y][unit.x] = ".";
         board[newY][newX] = unit.species[0].toUpperCase();
@@ -153,10 +172,10 @@ export const part1 = (raw) => {
       takeTurn(unit);
     }
 
-    if (rounds === 1) {
-      print();
-    }
-    // print();
+    // if (rounds === 1) {
+    print();
+    // }
+
     return true;
   };
 
