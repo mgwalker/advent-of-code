@@ -5,6 +5,7 @@
     "prefer-destructuring": [0],
     "import/no-extraneous-dependencies":0,
     "import/extensions": [2, "always"],
+    "no-param-reassign": ["error", {"props":false}],
     "no-restricted-syntax": 0
   },
   "env": {

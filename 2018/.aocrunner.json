@@ -214,23 +214,25 @@
     },
     {
       "part1": {
-        "solved": false,
-        "result": "10234",
+        "solved": true,
+        "result": "193476",
         "attempts": [
           "260550",
           "193228",
           "190344",
           "190542",
           "192826",
-          "193528"
+          "193528",
+          "188873",
+          "196280"
         ],
-        "time": 4.742208
+        "time": 2791.070833
       },
       "part2": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "36768",
         "attempts": [],
-        "time": null
+        "time": 58593.910083
       }
     },
     {
