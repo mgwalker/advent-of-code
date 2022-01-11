@@ -38,130 +38,127 @@ const input = (raw) =>
       return coords;
     });
 
-export const part1 = (raw) => {
-  const data = input(raw);
+const printable = (data, ground) => {
+  const xs = data.map(([x]) => x);
+  const minX = Math.min(...xs);
+  const maxX = Math.max(...xs);
+
+  const ys = data.map(([, y]) => y);
+  const maxY = Math.max(...ys);
+
+  const rows = [];
+  for (let y = 1; y <= maxY; y += 1) {
+    const row = [];
+    for (let x = minX; x <= maxX; x += 1) {
+      const v = ground.get(`${x},${y}`);
+      row.push(v === false ? " " : v);
+    }
+    rows.push(row.join(""));
+  }
+  return rows.join("\n");
+};
+
+const run = (data) => {
   const ys = data.map(([, y]) => y);
   const minY = Math.min(...ys);
   const maxY = Math.max(...ys);
 
-  // false = unblocked (sand), true = blocked (clay or water)
   const ground = new DefaultMap(
     false,
     data.map(([x, y]) => [`${x},${y}`, "#"])
   );
 
-  const printable = () => {
-    const xs = data.map(([x]) => x);
-    const minX = Math.min(...xs);
-    const maxX = Math.max(...xs);
-
-    const rows = [];
-    for (let y = 1; y <= maxY; y += 1) {
-      const row = [];
-      for (let x = minX; x <= maxX; x += 1) {
-        const v = ground.get(`${x},${y}`);
-        row.push(v === false ? " " : v);
-      }
-      rows.push(row.join(""));
-    }
-    return rows.join("\n");
-  };
-
   const queue = [[500, minY]];
 
-  const sort = (a, b) => {
-    let ya = a[1];
-    let yb = b[1];
-
-    if (Array.isArray(a[0])) {
-      ya = a[0][1];
-    }
-    if (Array.isArray(b[0])) {
-      yb = b[0][1];
-    }
-
-    return yb - ya;
-  };
-
-  let i = 0;
   while (queue.length > 0) {
-    i += 1;
-    queue.sort(sort);
-    const next = queue.pop();
-    if (Array.isArray(next[0])) {
-      next.forEach(([x, y]) => ground.set(`${x},${y}`, "~"));
+    const down = queue.pop();
 
-      if (next.some(([x, y]) => ground.get(`${x},${y + 1}`) === false)) {
-        // At least one of them can go down, starting a new stream. We don't
-        // want to queue a new stream but instead individual points.
-        for (const [x, y] of next) {
-          if (ground.get(`${x},${y + 1}`) === false) {
-            queue.push([x, y + 1]);
-          } else {
-            if (ground.get(`${x + 1},${y}`) === false) {
-              queue.push([[x + 1, y, false]]);
-            }
-            if (ground.get(`${x - 1},${y}`) === false) {
-              queue.push([[x - 1, y, false]]);
-            }
-          }
-        }
-      } else {
-        // Neither side goes down, so just keep spreading.
-        const stream = [];
-        const [[, , source]] = next;
+    if (down[1] <= maxY) {
+      ground.set(`${down[0]},${down[1]}`, "~");
+      const below = ground.get(`${down[0]},${down[1] + 1}`);
 
-        for (const [x, y] of next) {
-          if (ground.get(`${x + 1},${y}`) === false) {
-            stream.push([x + 1, y, source]);
-          }
-          if (ground.get(`${x - 1},${y}`) === false) {
-            stream.push([x - 1, y, source]);
-          }
+      if (below === false) {
+        queue.push([down[0], down[1] + 1]);
+      } else if (below !== "~") {
+        let y = down[1];
+        const downs = { left: -Infinity, right: Infinity };
+
+        while (downs.left === -Infinity && downs.right === Infinity) {
+          let [xL] = down;
+          let [xR] = down;
+
+          do {
+            ground.set(`${xL},${y}`, "`");
+            if (
+              ground.get(`${xL},${y + 1}`) === false ||
+              ground.get(`${xL},${y + 1}`) === "~"
+            ) {
+              downs.left = xL;
+
+              break;
+            }
+            xL -= 1;
+          } while (ground.get(`${xL},${y}`) !== `#`);
+
+          do {
+            ground.set(`${xR},${y}`, "`");
+            if (
+              ground.get(`${xR},${y + 1}`) === false ||
+              ground.get(`${xR},${y + 1}`) === "~"
+            ) {
+              downs.right = xR;
+              break;
+            }
+            xR += 1;
+          } while (ground.get(`${xR},${y}`) !== "#");
+
+          y -= 1;
         }
-        if (stream.length > 0) {
-          queue.unshift(stream);
-        } else {
-          // We can't spread left or right any further, and we can't go down.
-          // Re-queue the source node for more investigation!
-          if (source) {
-            queue.push([source[0], source[1] - 1]);
+
+        y += 1;
+        if (downs.left !== -Infinity) {
+          for (let x = downs.left; x < downs.right; x += 1) {
+            if (ground.get(`${x},${y}`) === "#") {
+              break;
+            }
+            ground.set(`${x},${y}`, "~");
           }
+          queue.push([downs.left, y]);
+        }
+        if (downs.right !== Infinity) {
+          for (let x = downs.right; x > downs.left; x -= 1) {
+            if (ground.get(`${x},${y}`) === "#") {
+              break;
+            }
+            ground.set(`${x},${y}`, "~");
+          }
+          queue.push([downs.right, y]);
         }
       }
-    } else {
-      const [x, y] = next;
-      if (y >= minY && y <= maxY) {
-        ground.set(`${x},${y}`, "~");
-
-        if (ground.get(`${x},${y + 1}`) === false) {
-          queue.push([x, y + 1]);
-        } else {
-          const stream = [];
-          if (ground.get(`${x + 1},${y}`) !== "#") {
-            stream.push([x + 1, y, [x, y]]);
-          }
-          if (ground.get(`${x - 1},${y}`) !== "#") {
-            stream.push([x - 1, y, [x, y]]);
-          }
-          if (stream.length > 0) {
-            queue.push(stream);
-          }
-        }
-      }
-    }
-    if (i > 897) {
-      console.log(queue);
-      break;
     }
   }
 
-  fs.writeFileSync("src/day17/map.txt", printable());
+  return ground;
+};
+
+export const part1 = (raw) => {
+  const data = input(raw);
+  const ground = run(data);
+
+  for (const [key, value] of ground) {
+    if (value === "`") {
+      ground.set(key, "~");
+    }
+  }
+
+  fs.writeFileSync("src/day17/map.txt", printable(data, ground));
 
   return [...ground.values()].filter((v) => v === "~").length;
 };
 
 export const part2 = (raw) => {
   const data = input(raw);
-  return;
+  const ground = run(data);
+
+  return [...ground.values()].filter((v) => v === "`").length;
 };
