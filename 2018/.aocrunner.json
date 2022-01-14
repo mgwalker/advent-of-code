@@ -340,7 +340,7 @@
         "attempts": [
           "3740"
         ],
-        "time": 2.77675
+        "time": 3.016792
       },
       "part2": {
         "solved": true,
@@ -353,15 +353,15 @@
           "1027",
           "1083"
         ],
-        "time": 4069.718792
+        "time": 4350.536083
       }
     },
     {
       "part1": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "7",
         "attempts": [],
-        "time": null
+        "time": 0.179333
       },
       "part2": {
         "solved": false,
