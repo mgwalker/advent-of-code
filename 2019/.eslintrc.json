@@ -1,0 +1,19 @@
+{
+  "extends": ["airbnb-base", "prettier"],
+  "rules": {
+    "no-bitwise": 0,
+    "no-console": 0,
+    "prefer-destructuring": [0],
+    "import/no-extraneous-dependencies":0,
+    "import/extensions": [2, "always"],
+    "no-param-reassign": ["error", {"props":false}],
+    "no-restricted-syntax": 0
+  },
+  "env": {
+    "es6": true,
+    "es2020":true,
+    "es2021":true,
+    "node": true
+  },
+  "parserOptions": { "ecmaVersion": 2021 }
+}
