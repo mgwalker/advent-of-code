@@ -27,6 +27,11 @@ class Chemical {
     Chemical.#_chemicals.set(outChemical, this);
   }
 
+  static reset() {
+    Chemical.#_storage.clear();
+    Chemical.#_created.clear();
+  }
+
   static get(chemical) {
     return Chemical.#_chemicals.get(chemical);
   }
@@ -76,5 +81,14 @@ export const part1 = (raw) => {
 
 export const part2 = (raw) => {
   input(raw);
-  return;
+
+  Chemical.reset();
+  const fuel = Chemical.get("FUEL");
+  while (Chemical.howMuch("ORE") <= 1_000_000_000_000) {
+    fuel.make(1);
+  }
+
+  console.log(Chemical.howMuch("ORE"));
+
+  return Chemical.howMuch("FUEL") - 1;
 };
