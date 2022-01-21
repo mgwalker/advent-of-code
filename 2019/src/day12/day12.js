@@ -45,12 +45,12 @@ class Moon {
     return this.#_position.reduce((sum, v) => sum + Math.abs(v), 0);
   }
 
-  get state() {
-    return `<${this.#_position.join(",")}|${this.#_velocity.join(",")}>`;
-  }
-
   position(i) {
     return this.#_position[i];
+  }
+
+  velocity(i) {
+    return this.#_velocity[i];
   }
 
   print() {
@@ -97,40 +97,16 @@ export const part1 = (raw) => {
 
 export const part2 = (raw) => {
   const moons = input(raw);
-  const states = new Map();
 
-  const state = () => {
-    return moons.map((m) => m.state).join(",");
+  // Find the cycles for each of X, Y, and Z. Then find the least common
+  // multiple between them. That'll go a lot faster than iteration 500 trillion
+  // times of planetary movements. :P
 
-    // return moons
-    //   .map((m) => {
-    //     const distances = [];
-    //     for (const other of moons) {
-    //       distances.push(m.distanceTo(other));
-    //     }
-    //     return distances.join(",");
-    //   })
-    //   .join("|");
-  };
-
-  // Brute force could work, for intense amounts of memory to store the billions
-  // of unique states. Instead, maybe something about their positions and
-  // velocities relative to each other. Or maybe the positions/velocities are
-  // ordered by value or something. That seems like it would only work if all
-  // the moons' p/vs are rotated in the same ways, though, not just arbitrarily.
-  //
-  // Can you derive v as a function of t, and then p as a second-order function
-  // of t, perhaps? v(t) would include p(t-1) in its equations, so... not sure.
-  //
-  // v1(t) = v(t-1) + [p2(t-1) - p1(t-1)]/|p2(t-1) - p1(t-1)| (...etc for moons)
-  // p1(t) = p1(t-1) + v1(t)
+  const cycles = [0, 0, 0];
+  const pTargets = [0, 1, 2].map((i) => moons.map((m) => m.position(i)));
 
   let steps = 0;
-  while (!states.has(state()) && steps < 10_000) {
-    if (steps < 10) {
-      console.log(state());
-    }
-    states.set(state(), steps);
+  while (cycles.some((v) => v === 0)) {
     steps += 1;
 
     for (const moon of moons) {
@@ -144,29 +120,52 @@ export const part2 = (raw) => {
     for (const moon of moons) {
       moon.move();
     }
+
+    for (const i of [0, 1, 2]) {
+      if (cycles[i] === 0) {
+        if (
+          moons.every(
+            (m, mi) => m.position(i) === pTargets[i][mi] && m.velocity(i) === 0,
+          )
+        ) {
+          cycles[i] = steps;
+        }
+      }
+    }
   }
 
-  console.log("===");
-  console.log(steps);
-  console.log(state());
-  console.log(states.get(state()));
+  const lcm = (...numbers) => {
+    const nums = [...numbers];
+    const max = Math.max(...nums);
 
-  // for (let i = 0; i < 10; i += 1) {
-  //   steps += 1;
+    let result = 1;
+    let factor = 2;
 
-  //   for (const moon of moons) {
-  //     for (const other of moons) {
-  //       if (other !== moon) {
-  //         moon.applyGravity(other);
-  //       }
-  //     }
-  //   }
+    while (factor <= max) {
+      const indices = [];
+      for (let i = 0; i < nums.length; i += 1) {
+        if (nums[i] % factor === 0) {
+          indices.push(i);
+        }
+      }
 
-  //   for (const moon of moons) {
-  //     moon.move();
-  //   }
-  //   console.log(state());
-  // }
+      if (indices.length >= 2) {
+        for (const i of indices) {
+          nums[i] = Math.round(nums[i] / factor);
+        }
+        result *= factor;
+      } else {
+        factor += 1;
+      }
+    }
 
-  return steps;
+    console.log(nums);
+    for (const num of nums) {
+      result *= num;
+    }
+
+    return result;
+  };
+
+  return lcm(...cycles);
 };
