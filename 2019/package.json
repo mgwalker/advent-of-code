@@ -25,6 +25,7 @@
     "node": ">=16.13.0"
   },
   "dependencies": {
+    "a-star": "^0.2.0",
     "cli-position": "^1.0.1"
   }
 }
