@@ -1,0 +1,30 @@
+{
+  "name": "aoc2022",
+  "version": "1.0.0",
+  "description": "Advent of Code 2022 - solutions",
+  "type": "module",
+  "scripts": {
+    "start": "aocrunner day",
+    "format": "prettier -w src"
+  },
+  "keywords": [
+    "aoc"
+  ],
+  "author": "Greg Walker",
+  "license": "ISC",
+  "devDependencies": {
+    "aocrunner": "^1.6.1",
+    "eslint": "^8.16.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "prettier": "^2.4.1"
+  },
+  "dependencies": {
+    "utils": "file:src/utils"
+  },
+  "engines": {
+    "node": ">=16.13.0"
+  },
+  "prettier": {}
+}
