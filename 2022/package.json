@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "aocrunner day",
-    "format": "prettier -w src"
+    "format": "prettier -w src",
+    "readme": "node readmes.js"
   },
   "keywords": [
     "aoc"
