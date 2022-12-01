@@ -4,7 +4,7 @@
   "description": "Advent of Code 2022 - solutions",
   "type": "module",
   "scripts": {
-    "start": "aocrunner day",
+    "start": "aocrunner",
     "format": "prettier -w src",
     "readme": "node readmes.js"
   },
@@ -14,7 +14,7 @@
   "author": "Greg Walker",
   "license": "ISC",
   "devDependencies": {
-    "aocrunner": "^1.6.1",
+    "aocrunner": "../../aocrunner",
     "eslint": "^8.16.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
