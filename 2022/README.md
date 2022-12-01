@@ -1,17 +1,12 @@
 <!-- Entries between SOLUTIONS and RESULTS tags are auto-generated -->
 
-[![AoC](https://badgen.net/badge/AoC/2022/blue)](https://adventofcode.com/2022)
-[![Node](https://badgen.net/badge/Node/v16.13.0+/blue)](https://nodejs.org/en/download/)
-![Language](https://badgen.net/badge/Language/JavaScript/blue)
-[![Template](https://badgen.net/badge/Template/aocrunner/blue)](https://github.com/caderek/aocrunner)
-
 # 🎄 Advent of Code 2022 🎄
 
 ## Solutions
 
 <!--SOLUTIONS-->
 
-![Day](https://badgen.net/badge/01/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/01/%E2%98%86%E2%98%86/green)](src/day01)
 ![Day](https://badgen.net/badge/02/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/03/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/04/%E2%98%86%E2%98%86/gray)
@@ -69,9 +64,9 @@ npm start 1
 
 ```
 Day 01
-Time part 1: -
-Time part 2: -
-Both parts: -
+Time part 1: 0.25ms
+Time part 2: 0.31ms
+Both parts: 0.56ms
 ```
 
 ```

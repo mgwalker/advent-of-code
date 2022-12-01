@@ -1,19 +1,23 @@
-const parseInput = async (rawInput) =>
-  rawInput.split("\n\n").map((elf) =>
-    elf
-      .split("\n")
-      .map((calories) => +calories)
-      .reduce((sum, calories) => sum + calories, 0)
-  );
+import run from "aocrunner";
+import { sum, toNumbers } from "utils";
 
-export const part1 = async (rawInput) => {
-  const input = await parseInput(rawInput);
-  return Math.max(...input);
+const input = (raw) =>
+  raw.split("\n\n").map((elf) => elf.split("\n").map(toNumbers).reduce(sum));
+
+export const part1 = (raw) => {
+  const data = input(raw);
+  return Math.max(...data);
 };
 
-export const part2 = async (rawInput) => {
-  const input = await parseInput(rawInput);
-  const top3 = input.sort((a, b) => b - a).slice(0, 3);
+export const part2 = (raw) => {
+  const data = input(raw);
+  const top3 = data.sort((a, b) => b - a).slice(0, 3);
 
-  return top3.reduce((s, v) => s + v, 0);
+  return top3.reduce(sum);
 };
+
+run({
+  part1: { solution: part1 },
+  part2: { solution: part2 },
+  trimTestInputs: true,
+});
