@@ -1,6 +1,7 @@
 import run from "aocrunner";
+import {} from "utils";
 
-const input = (raw) => {};
+const input = (raw) => raw;
 
 export const part1 = (raw) => {
   const data = input(raw);
