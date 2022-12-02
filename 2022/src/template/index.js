@@ -1,5 +1,5 @@
 import run from "aocrunner";
-import {} from "utils";
+import { sum, toNumbers } from "utils";
 
 const input = (raw) => raw;
 
