@@ -1,5 +1,5 @@
 import run from "aocrunner";
-import { sum, toNumbers } from "utils";
+import { toNumbers } from "utils";
 
 const input = (raw) => {
   const [stacksMeta, moves] = raw.split("\n\n");
@@ -12,7 +12,7 @@ const input = (raw) => {
   for (let level = 0; level < stackRows.length; level += 1) {
     const boxes = stackRows[level]
       .match(/(^|\s).{3}/g)
-      .map((v) => v.replace(/[\s\[\]]/g, ""));
+      .map((v) => v.replace(/[\s[\]]/g, ""));
 
     for (let i = 0; i < boxes.length; i += 1) {
       if (boxes[i].length > 0) {
