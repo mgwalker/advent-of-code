@@ -73,16 +73,18 @@
     },
     {
       "part1": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "QGTHFZBHV",
         "attempts": [],
-        "time": null
+        "time": 1.192042,
+        "readme": true
       },
       "part2": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "MGDMPSZTM",
         "attempts": [],
-        "time": null
+        "time": 0.470792,
+        "readme": true
       }
     },
     {
