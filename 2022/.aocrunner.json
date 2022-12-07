@@ -108,14 +108,14 @@
         "solved": true,
         "result": "1491614",
         "attempts": [],
-        "time": 1.482875,
+        "time": 2.314167,
         "readme": true
       },
       "part2": {
         "solved": true,
         "result": "6400111",
         "attempts": [],
-        "time": 1.254833,
+        "time": 1.174083,
         "readme": true
       }
     },

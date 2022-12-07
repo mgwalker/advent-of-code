@@ -60,17 +60,20 @@ const getFSTree = (instructions) => {
     dir.subdirs = dir.subdirs.map((sub) => directories.get(sub));
   });
 
-  const getDirectorySize = (dir) => {
-    if (dir) {
-      dir.subdirs.forEach(getDirectorySize);
+  const sized = new Set();
+  const dirAsList = [...directories].map(([, dir]) => dir);
 
-      dir.size =
-        dir.files.map(({ size }) => size).reduce(sum, 0) +
-        dir.subdirs.map((sub) => sub.size ?? 0).reduce(sum, 0);
-    }
-  };
+  while (sized.size < directories.size) {
+    dirAsList
+      .filter(({ subdirs }) => subdirs.every((d) => sized.has(d)))
+      .forEach((dir) => {
+        dir.size =
+          dir.files.map(({ size }) => size).reduce(sum, 0) +
+          dir.subdirs.map(({ size }) => size).reduce(sum, 0);
 
-  getDirectorySize(directories.get("/"));
+        sized.add(dir);
+      });
+  }
 
   return directories;
 };
@@ -79,11 +82,11 @@ export const part1 = (raw) => {
   const data = input(raw);
   const tree = getFSTree(data);
 
-  const dirs = [...tree]
-    .map(([, dir]) => dir)
-    .filter(({ size }) => size <= 100000);
+  const sizes = [...tree]
+    .map(([, { size }]) => size)
+    .filter((size) => size <= 100000);
 
-  return dirs.map(({ size }) => size).reduce(sum, 0);
+  return sizes.reduce(sum, 0);
 };
 
 export const part2 = (raw) => {
