@@ -5,6 +5,8 @@
 import CountingSet from "counting-set";
 
 const toNumbers = (value) => +value;
+
+const product = (total, value) => total * value;
 const sum = (total, value) => total + value;
 
-export { CountingSet, toNumbers, sum };
+export { CountingSet, toNumbers, product, sum };
