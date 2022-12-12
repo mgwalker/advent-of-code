@@ -22,6 +22,7 @@
     "prettier": "^2.4.1"
   },
   "dependencies": {
+    "a-star": "^0.2.0",
     "utils": "file:src/utils"
   },
   "engines": {
