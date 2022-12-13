@@ -65,6 +65,10 @@ export const part2 = (raw) => {
   const dividers = [[2], [6]].sort(sorter).map((p, j) => {
     for (let i = 0; i < sorted.length; i += 1) {
       if (comparator(p, sorted[i])) {
+        // indexes start at 1. increment by whichever divider we're on as well
+        // because we're trying to find the indices where they would land if
+        // they were inserted; previous dividers would have already been
+        // inserted, so increment the returned index accordingly
         return i + 1 + j;
       }
     }
