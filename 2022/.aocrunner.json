@@ -258,9 +258,9 @@
     {
       "part1": {
         "solved": false,
-        "result": null,
+        "result": "[object Object]",
         "attempts": [],
-        "time": null
+        "time": 25.185167
       },
       "part2": {
         "solved": false,
