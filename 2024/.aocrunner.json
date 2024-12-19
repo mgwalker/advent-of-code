@@ -78,18 +78,18 @@
     },
     {
       "part1": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "6034",
         "attempts": [],
-        "time": null,
-        "readme": false
+        "time": 2.435291,
+        "readme": true
       },
       "part2": {
-        "solved": false,
-        "result": null,
+        "solved": true,
+        "result": "6305",
         "attempts": [],
-        "time": null,
-        "readme": false
+        "time": 4.152459,
+        "readme": true
       }
     },
     {
